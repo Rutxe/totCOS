@@ -273,8 +273,7 @@
             background-color: #c77a27;
 
         }
-
-        /* --- Media Queries (para diseño responsive) --- */
+          /* --- Media Queries (para diseño responsive) --- */
 
         /* Tablets */
         @media (max-width: 768px) {
@@ -285,6 +284,11 @@
             .servicio {
               flex: 0 1 80%;
               max-width: 80%;
+            }
+             .language-switcher {
+                position: static; /* En pantallas pequeñas, los botones se mostrarán en el flujo normal */
+                margin-bottom: 10px;
+                text-align: center;
             }
         }
 
@@ -348,7 +352,7 @@
         <section id="servicios" class="servicios">
             <!-- Servicio 1: Masaje -->
             <div class="servicio">
-              <img src="https://images.pexels.com/photos/450441/pexels-photo-450441.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Masaje Relajante">
+                <img src="https://images.pexels.com/photos/3997991/pexels-photo-3997991.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Masaje Relajante">
                 <div class="servicio-info">
                     <h3 class="idioma" data-es="Masaje Relajante" data-ca="Massatge Relaxant">Masaje Relajante</h3>
                     <p class="idioma" data-es="Libera tensiones y reduce el estrés con nuestro masaje relajante de cuerpo completo, realizado con técnicas expertas y aceites esenciales." data-ca="Allibera tensions i redueix l'estrès amb el nostre massatge relaxant de cos complet, realitzat amb tècniques expertes i olis essencials.">Libera tensiones y reduce el estrés con nuestro masaje relajante de cuerpo completo, realizado con técnicas expertas y aceites esenciales.</p>
@@ -357,7 +361,7 @@
 
             <!-- Servicio 2: Ayurveda -->
             <div class="servicio">
-                <img src="https://images.pexels.com/photos/9409258/pexels-photo-9409258.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Tratamiento Ayurveda">
+                <img src="https://images.pexels.com/photos/7679881/pexels-photo-7679881.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Tratamiento Ayurveda">
                   <div class="servicio-info">
                       <h3 class="idioma" data-es="Tratamiento Ayurveda" data-ca="Tractament Ayurveda">Tratamiento Ayurveda</h3>
                       <p class="idioma" data-es="Experimenta el equilibrio y la armonía con nuestros tratamientos Ayurveda personalizados, basados en la antigua medicina tradicional india." data-ca="Experimenta l'equilibri i l'harmonia amb els nostres tractaments Ayurveda personalitzats, basats en l'antiga medicina tradicional índia.">Experimenta el equilibrio y la armonía con nuestros tratamientos Ayurveda personalizados, basados en la antigua medicina tradicional india.</p>
@@ -366,7 +370,7 @@
 
               <!-- Servicio 3: Manicura -->
               <div class="servicio">
-                <img src="https://images.pexels.com/photos/3997991/pexels-photo-3997991.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Manicura">
+                <img src="https://images.pexels.com/photos/4397917/pexels-photo-4397917.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Manicura">
                   <div class="servicio-info">
                       <h3 class="idioma" data-es="Manicura Spa" data-ca="Manicura Spa">Manicura Spa</h3>
                       <p class="idioma" data-es="Embellece tus manos con nuestra manicura spa de lujo, que incluye exfoliación, hidratación y un esmaltado impecable." data-ca="Embelleix les teves mans amb la nostra manicura spa de luxe, que inclou exfoliació, hidratació i un esmaltat impecable.">Embellece tus manos con nuestra manicura spa de lujo, que incluye exfoliación, hidratación y un esmaltado impecable.</p>
@@ -376,7 +380,7 @@
 
         <section id="sobre-nosotros" class="sobre-nosotros">
              <h2 class="idioma" data-es="Nuestra Filosofía" data-ca="La Nostra Filosofia">Nuestra Filosofía</h2>
-             <p class="idioma" data-es="En totCOS, un rincón de paz en el bullicioso corazón de Barcelona, creemos que cada cliente es único.  Meritxell, nuestra terapeuta con más de 12 años de experiencia, te guiará en un viaje de bienestar personalizado.  Nuestro objetivo es que encuentres un espacio de serenidad y renovación, donde la belleza exterior se une con el equilibrio interior. Utilizamos productos de alta calidad y técnicas avanzadas para ofrecerte una experiencia revitalizante y transformadora." data-ca="A totCOS, un racó de pau en el bulliciós cor de Barcelona, creiem que cada client és únic. La Meritxell, la nostra terapeuta amb més de 12 anys d'experiència, et guiarà en un viatge de benestar personalitzat. El nostre objectiu és que trobis un espai de serenitat i renovació, on la bellesa exterior s'uneix amb l'equilibri interior. Utilitzem productes d'alta qualitat i tècniques avançades per oferir-te una experiència revitalitzant i transformadora.">En totCOS, un rincón de paz en el bullicioso corazón de Barcelona, creemos que cada cliente es único.  Meritxell, nuestra terapeuta con más de 12 años de experiencia, te guiará en un viaje de bienestar personalizado.  Nuestro objetivo es que encuentres un espacio de serenidad y renovación, donde la belleza exterior se une con el equilibrio interior. Utilizamos productos de alta calidad y técnicas avanzadas para ofrecerte una experiencia revitalizante y transformadora.</p>
+             <p class="idioma" data-es="En totCOS, un rincón de paz en el bullicioso corazón de Barcelona, creemos que cada cliente es único.  Meritxell, terapeuta, dueña y única trabajadora del centro, con más de 25 años de experiencia, te guiará en un viaje de bienestar personalizado. totCOS abrió sus puertas hace 12 años con el objetivo de que encuentres un espacio de serenidad y renovación, donde la belleza exterior se une con el equilibrio interior. Utilizamos productos de alta calidad y técnicas avanzadas para ofrecerte una experiencia revitalizante y transformadora." data-ca="A totCOS, un racó de pau en el bulliciós cor de Barcelona, creiem que cada client és únic. La Meritxell, terapeuta, propietaria i única treballadora del centre, amb més de 25 anys d'experiència, et guiará en un viatge de benestar personalitzat. totCOS va obrir les seves portes fa 12 anys amb l'objectiu de que trobis un espai de serenitat i renovació, on la bellesa exterior s'uneix amb l'equilibri interior. Utilitzem productes d'alta qualitat i tècniques avançades per a oferir-te una experiencia revitalitzant i transformadora.">En totCOS, un rincón de paz en el bullicioso corazón de Barcelona, creemos que cada cliente es único.  Meritxell, terapeuta, dueña y única trabajadora del centro, con más de 25 años de experiencia, te guiará en un viaje de bienestar personalizado. totCOS abrió sus puertas hace 12 años con el objetivo de que encuentres un espacio de serenidad y renovación, donde la belleza exterior se une con el equilibrio interior. Utilizamos productos de alta calidad y técnicas avanzadas para ofrecerte una experiencia revitalizante y transformadora.</p>
           </section>
 
         <section id="contacto" class="contacto">
@@ -393,6 +397,8 @@
 
     <footer>
       <p>© 2024 totCOS - Todos los derechos reservados</p>
+      <p><a href="https://www.instagram.com/totcoscentre/" target="_blank"><i class="fab fa-instagram"></i> totcoscentre</a></p>  <!-- Enlace a Instagram -->
+
       <p>Diseñado por ... (opcional)</p>
     </footer>
 
