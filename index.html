@@ -244,35 +244,35 @@
         footer a:hover{
             text-decoration: underline;
         }
-
+          /* --- Sección Síguenos en Instagram (Ahora al principio) --- */
         .siguenos-instagram {
             text-align: center;
-            margin: 20px 0;
+            margin: 30px 0; /*  margen arriba y abajo */
         }
 
         .siguenos-instagram a {
             color: #e78f28;
             text-decoration: none;
-            font-size: 1.5em;
+            font-size: 2em; /* Aún más grande */
             font-weight: bold;
-            display: inline-block;
-            padding: 10px 20px;
-            border-radius: 5px;
+            display: inline-flex; /* Para centrar verticalmente el icono */
+            align-items: center; /* Centra verticalmente */
+            justify-content: center; /* Centra horizontalmente */
+            padding: 15px 30px; /* Más padding */
+            border-radius: 10px; /* Bordes más redondeados */
             transition: background-color 0.3s, color 0.3s;
-
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra */
         }
 
         .siguenos-instagram a:hover {
             background-color: #e78f28;
             color: #fff;
-             text-decoration: none;
-
+            text-decoration: none;
         }
 
         .siguenos-instagram i {
-            margin-right: 8px;
-            font-size: 2em;
-
+            margin-right: 12px; /* Más espacio */
+            font-size: 2.5em; /* Icono más grande */
         }
 
                /*Boton cambio idioma*/
@@ -281,7 +281,7 @@
             position: absolute;
             top: 20px;
             right: 20px;
-            z-index: 1000;
+            z-index: 1000; /* Asegura que esté por encima de otros elementos */
 
         }
 
@@ -292,7 +292,7 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            margin-left: 5px;
+            margin-left: 5px; /* Espacio entre botones */
             font-size: 1rem;
             font-weight: bold;
         }
@@ -313,9 +313,20 @@
               max-width: 80%;
             }
              .language-switcher {
-                position: static;
+                position: static; /* En pantallas pequeñas, los botones se mostrarán en el flujo normal */
                 margin-bottom: 10px;
                 text-align: center;
+            }
+              .siguenos-instagram {
+                margin: 20px 0; /* Ajusta el margen en pantallas pequeñas */
+            }
+              .siguenos-instagram a {
+                font-size: 1.5em; /* Reduce un poco el tamaño en móviles */
+                padding: 10px 20px;
+            }
+              .siguenos-instagram i {
+                font-size: 2em;
+                margin-right: 8px;
             }
         }
 
@@ -369,6 +380,14 @@
             </nav>
         </header>
 
+          <!-- Sección Síguenos en Instagram -->
+        <div class="siguenos-instagram">
+            <a href="https://www.instagram.com/totcoscentre/" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-instagram"></i>
+                <span class="idioma" data-es="Síguenos en Instagram" data-ca="Segueix-nos a Instagram">Síguenos en Instagram</span>
+            </a>
+        </div>
+
         <section id="inicio" class="hero">
             <h2 class="idioma" data-es="Descubre la Belleza en Armonía" data-ca="Descobreix la Bellesa en Harmonia">Descubre la Belleza en Armonía</h2>
             <p class="idioma" data-es="Sumérgete en un oasis de tranquilidad y renueva tu belleza interior y exterior en el corazón de Barcelona." data-ca="Submergeix-te en un oasi de tranquil·litat i renova la teva bellesa interior i exterior al cor de Barcelona.">Sumérgete en un oasis de tranquilidad y renueva tu belleza interior y exterior en el corazón de Barcelona.</p>
@@ -387,7 +406,7 @@
 
             <!-- Ayurveda -->
             <div class="servicio">
-                <img src="https://images.pexels.com/photos/9549311/pexels-photo-9549311.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Tratamiento Ayurveda">
+                <img src="https://images.pexels.com/photos/4021883/pexels-photo-4021883.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Tratamiento Ayurveda">
                 <div class="servicio-info">
                     <h3 class="idioma" data-es="Tratamiento Ayurveda" data-ca="Tractament Ayurveda">Tratamiento Ayurveda</h3>
                     <p class="idioma" data-es="Equilibrio y armonía con tratamientos Ayurveda personalizados." data-ca="Equilibri i harmonia amb tractaments Ayurveda personalitzats.">Equilibrio y armonía con tratamientos Ayurveda personalizados.</p>
@@ -396,7 +415,7 @@
 
             <!-- Manicura/Pedicura -->
             <div class="servicio">
-                <img src="https://images.pexels.com/photos/13479685/pexels-photo-13479685.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Manicura y Pedicura">
+                <img src="https://images.pexels.com/photos/3880685/pexels-photo-3880685.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Manicura y Pedicura">
                 <div class="servicio-info">
                     <h3 class="idioma" data-es="Manicura y Pedicura Spa" data-ca="Manicura i Pedicura Spa">Manicura y Pedicura Spa</h3>
                     <p class="idioma" data-es="Embellece tus manos y pies con nuestros servicios." data-ca="Embelleix les teves mans i peus amb els nostres serveis.">Embellece tus manos y pies con nuestros servicios.</p>
@@ -422,13 +441,6 @@
 
     <footer>
       <p>© 2024 totCOS - Todos los derechos reservados</p>
-      <!--  Síguenos en Instagram  -->
-        <div class="siguenos-instagram">
-            <a href="https://www.instagram.com/totcoscentre/" target="_blank" rel="noopener noreferrer">
-              <i class="fab fa-instagram"></i>
-                <span class="idioma" data-es="Síguenos en Instagram" data-ca="Segueix-nos a Instagram">Síguenos en Instagram</span>
-            </a>
-        </div>
       <p>Diseñado por ... (opcional)</p>
     </footer>
 
