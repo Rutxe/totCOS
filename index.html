@@ -88,14 +88,48 @@
             color: #fff;
         }
 
-        /* --- Sección Principal (Hero) --- */
-         .hero {
-             background-image: url('https://lh3.googleusercontent.com/p/AF1QipPpbrsr8fMwONsDRE7eIeRv7GUrB9NsDDH3tgoW=s680-w680-h510');
-            background-size: cover;
-            background-position: center;
-            color: white;
-            text-align: center;
-            padding: 80px 20px;
+       /* --- Sección Hero (Carrusel) --- */
+        .hero {
+            position: relative; /* Necesario para posicionar los controles */
+            overflow: hidden; /* Oculta las imágenes que no se muestran */
+            width: 100%;
+            max-height: 600px; /* Ajusta la altura máxima del carrusel */
+
+        }
+
+        .carrusel {
+            display: flex;
+            transition: transform 0.8s ease-in-out; /* Transición suave */
+            width: 400%; /* Ancho total (4 imágenes * 100%) */
+
+        }
+
+        .carrusel img {
+            width: 100%; /* Cada imagen ocupa el 100% del contenedor .carrusel */
+            height: auto;
+            object-fit: cover; /* Cubre el espacio sin deformar */
+            object-position: center; /*Centra*/
+            flex: 0 0 25%; /* Distribución equitativa*/
+
+        }
+
+        .hero-overlay {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.2); /* Fondo semitransparente */
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          z-index: 1; /* Para que esté por encima de las imágenes */
+
+        }
+        .hero h2, .hero p, .hero .boton-hero {
+          position: relative; /* Asegura que el texto esté por encima del overlay */
+          z-index: 2;
         }
 
         .hero h2 {
@@ -282,15 +316,21 @@
          }
           .redes-sociales a {
             display: inline-block; /* Para que los márgenes funcionen */
-            margin: 0 10px; /* Espacio horizontal entre los iconos */
+            margin: 0 15px; /* Espacio horizontal entre los iconos */
             color: #e78f28;
-            font-size: 2em;
+            font-size: 2.5em; /* Aumenta el tamaño de los iconos */
          }
 
         .redes-sociales a:hover {
             color: #c77a27;
             text-decoration: none;
          }
+          .redes-sociales-texto {
+            text-align: center;
+            margin-bottom: 10px; /* Espacio debajo del texto */
+            font-size: 1.1em;
+            color: #555;
+        }
 
                /*Boton cambio idioma*/
 
@@ -348,6 +388,13 @@
             .redes-sociales a {
                 font-size: 1.5em; /* Reduce el tamaño en pantallas más pequeñas */
             }
+            .hero{
+                max-height: none;
+            }
+
+            .carrusel img{
+                 object-fit: contain;
+            }
         }
 
         /* Móviles */
@@ -400,6 +447,9 @@
             </nav>
         </header>
           <!-- Sección de Redes Sociales (Facebook e Instagram) -->
+         <div class="redes-sociales-texto idioma" data-es="Síguenos en nuestras redes sociales" data-ca="Segueix-nos a les nostres xarxes socials">
+            Síguenos en nuestras redes sociales
+         </div>
         <div class="redes-sociales">
             <a href="https://www.facebook.com/people/totcoscentre/100057121553428/" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-square"></i></a>
             <a href="https://www.instagram.com/totcoscentre/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
@@ -408,9 +458,17 @@
 
 
         <section id="inicio" class="hero">
-            <h2 class="idioma" data-es="Descubre la Belleza en Armonía" data-ca="Descobreix la Bellesa en Harmonia">Descubre la Belleza en Armonía</h2>
-            <p class="idioma" data-es="Sumérgete en un oasis de tranquilidad y renueva tu belleza interior y exterior en el corazón de Barcelona." data-ca="Submergeix-te en un oasi de tranquil·litat i renova la teva bellesa interior i exterior al cor de Barcelona.">Sumérgete en un oasis de tranquilidad y renueva tu belleza interior y exterior en el corazón de Barcelona.</p>
-            <a href="#contacto" class="boton-hero idioma" data-es="Reserva tu Cita" data-ca="Reserva la teva Cita">Reserva tu Cita</a>
+             <div class="carrusel">
+                <img src="https://lh3.googleusercontent.com/gps-cs-s/AB5caB9OhJvI96SmIiBs3qzmNNzkHDRxuQlCbJQXLop99UNjrk2_M4tekf5AnINYN_BXwF0yRqflm9HQfZoLdWwr8flz-VcFm0xU8yVmjg39w9hyxdEWi_IKI1fn7uQN3I_r5vgi-pLy8Q=s680-w680-h510" alt="Imagen 1">
+                <img src="https://lh3.googleusercontent.com/p/AF1QipNARNbR97JQL6o7J9u3FcI-JZ73U3q4NRdAo7-7=s680-w680-h510" alt="Imagen 2">
+                <img src="https://lh3.googleusercontent.com/p/AF1QipOmoidZ71QPTTHXgJNKnYSFVz5ab18_JIBYgECC=s680-w680-h510" alt="Imagen 3">
+                <img src="https://lh3.googleusercontent.com/p/AF1QipOvsmfKNxTeI1mXSRctXxvO3ucyO4z6HRgayrz4=s680-w680-h510" alt="Imagen 4">
+            </div>
+            <div class="hero-overlay">
+              <h2 class="idioma" data-es="Descubre la Belleza en Armonía" data-ca="Descobreix la Bellesa en Harmonia">Descubre la Belleza en Armonía</h2>
+              <p class="idioma" data-es="Sumérgete en un oasis de tranquilidad y renueva tu belleza interior y exterior en el corazón de Barcelona." data-ca="Submergeix-te en un oasi de tranquil·litat i renova la teva bellesa interior i exterior al cor de Barcelona.">Sumérgete en un oasis de tranquilidad y renueva tu belleza interior y exterior en el corazón de Barcelona.</p>
+              <a href="#contacto" class="boton-hero idioma" data-es="Reserva tu Cita" data-ca="Reserva la teva Cita">Reserva tu Cita</a>
+            </div>
         </section>
 
         <section id="servicios" class="servicios">
@@ -481,6 +539,25 @@
         // Obtener la URL base y corregir el enlace del logo
         const baseUrl = window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/')) + '/';
         document.getElementById('logo-texto').href = baseUrl;
+
+        // --- Carrusel ---
+        let indiceImagen = 0;
+        const carrusel = document.querySelector('.carrusel');
+        const totalImagenes = document.querySelectorAll('.carrusel img').length; // Cuenta las imágenes
+
+        function mostrarImagen(indice) {
+          const desplazamiento = -indice * (100 / totalImagenes); //  Desplazamiento
+          carrusel.style.transform = `translateX(${desplazamiento}%)`;
+        }
+
+        function siguienteImagen() {
+            indiceImagen = (indiceImagen + 1) % totalImagenes; // Usa el total de imágenes
+            mostrarImagen(indiceImagen);
+        }
+        // Cambiar la imagen cada 5 segundos (5000 milisegundos)
+        setInterval(siguienteImagen, 5000);
+        // Mostrar la primera imagen al cargar la página
+        mostrarImagen(0);
 
     </script>
 </body>
