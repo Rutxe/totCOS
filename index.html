@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>totCOS - Tu Centro de Estética</title>
     <style>
-        /* --- Estilos Generales --- */
+        /* --- Estilos Generales (Mismos estilos que antes, sin cambios) --- */
         body {
-            font-family: sans-serif; /* Cambia a una fuente elegante si lo deseas */
+            font-family: sans-serif; /* Fuente base para el cuerpo */
             margin: 0;
             padding: 0;
             background-color: #f8f5f0; /* Beige claro de fondo */
@@ -16,12 +16,17 @@
 
         h1, h2, h3 {
             font-family: "Segoe Script", cursive;  /*Usamos Segoe Script para los titulos*/
-            color: #c79227; /* Dorado para títulos, puedes ajustar el tono */
-            text-align: center; /* Centra los títulos si quieres */
-
+            color: #c79227; /* Dorado para títulos */
+            text-align: center; /* Centra los títulos */
+        }
+        h1{
+            font-size: 3rem;
+        }
+        h2{
+            font-size: 2rem;
         }
 
-        /* --- Contenedor Principal (para centrar el contenido) --- */
+        /* --- Contenedor Principal --- */
          .contenedor {
             max-width: 960px;
             margin: 0 auto;
@@ -31,58 +36,68 @@
         /* --- Encabezado (Header) --- */
         header {
             background-color: #f8f5f0;
-            padding: 15px;
+            padding: 25px; /* Más espacio alrededor del encabezado */
             text-align: center;
+            border-bottom: 3px solid #e78f28; /* Línea naranja debajo del encabezado */
 
          }
 
-
-         #logo {
-           max-width: 250px; /* Ajusta el tamaño máximo del logo */
-           height: auto;
-           display: block; /* Para centrar la imagen horizontalmente */
-           margin: 0 auto;
-           border-radius: 100%;
-           border: 5px solid #e78f28;
-
+        /* Logo como texto */
+        #logo-texto {
+            font-family: "Segoe Script", cursive;
+            font-size: 4rem; /* Tamaño grande para el logo */
+            color: #e78f28; /* Naranja principal */
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+            display: block; /* Asegura que ocupe todo el ancho */
+            text-align: center;
+        }
+        #logo-texto:hover{
+            color:#c77a27;
         }
 
+        header p {
+            font-size: 1.1em;
+            color: #777; /* Gris más suave para el subtítulo */
+            margin-bottom: 20px;
+
+        }
 
         /* --- Barra de Navegación (Nav) --- */
         nav ul {
             list-style: none;
             padding: 0;
             margin: 20px 0;
-            text-align: center; /* Centra los enlaces horizontalmente */
+            text-align: center;
         }
 
         nav ul li {
-            display: inline; /* Muestra los elementos de la lista horizontalmente */
+            display: inline;
             margin: 0 15px;
         }
 
         nav a {
             text-decoration: none;
-            color: #a85725;  /*Marrón-Anaranjado para enlaces. Cambia si prefieres*/
+            color: #a85725;
             font-weight: bold;
             padding: 8px 12px;
             border-radius: 5px;
-            transition: background-color 0.3s; /* Transición suave */
+            transition: background-color 0.3s;
         }
 
         nav a:hover {
-            background-color: #e6a157; /* Dorado suave al pasar el ratón */
-            color: #fff; /* Texto blanco al pasar el ratón */
+            background-color: #e6a157;
+            color: #fff;
         }
 
-        /* --- Sección Principal (Hero Section) --- */
+        /* --- Sección Principal (Hero) --- */
          .hero {
-             background-image: url('ruta/a/tu/imagen-hero.jpg'); /* IMAGEN DE FONDO */
+             background-image: url('https://lh3.googleusercontent.com/p/AF1QipPpbrsr8fMwONsDRE7eIeRv7GUrB9NsDDH3tgoW=s680-w680-h510'); /* Imagen de Google */
              background-size: cover;
              background-position: center;
              color: white;
              text-align: center;
-             padding: 80px 20px; /* Ajusta según necesites */
+             padding: 80px 20px;
         }
 
         .hero h2 {
@@ -90,66 +105,62 @@
               margin-bottom: 20px;
               color: #fff;
               font-weight: bold;
-              text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);/* Sombra de texto para legibilidad */
+              text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
         }
 
         .hero p {
             font-size: 1.2em;
             margin-bottom: 30px;
-            color: #fff;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);/* Sombra de texto para legibilidad */
+            color:#f8f5f0;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
         }
 
         .boton-hero {
              display: inline-block;
-             background-color: #e78f28; /* Naranja principal para el botón */
+             background-color: #e78f28;
              color: white;
              padding: 15px 25px;
              text-decoration: none;
              border-radius: 8px;
              font-weight: bold;
-             transition: background-color 0.3s ease; /* Transición suave */
-             border: none; /* Quita bordes si los hubiera */
-             cursor: pointer; /* Cambia el cursor a una mano */
-
+             transition: background-color 0.3s ease;
+             border: none;
+             cursor: pointer;
          }
 
           .boton-hero:hover {
-                background-color: #c77a27; /* Un tono más oscuro al hacer hover */
-
+                background-color: #c77a27;
           }
 
         /* --- Sección de Servicios/Tratamientos --- */
         .servicios {
-            display: flex; /* Usamos Flexbox para organizar */
-            flex-wrap: wrap; /* Permite que los elementos se ajusten en pantallas pequeñas */
-            justify-content: space-around; /* Distribuye el espacio alrededor */
-            gap: 20px; /* Espacio entre los elementos */
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 20px;
             padding: 40px 0;
-
         }
 
         .servicio {
-             flex: 0 1 calc(33% - 20px); /* Intenta hacer 3 columnas, ajustándose */
+             flex: 0 1 calc(33% - 20px);
              max-width: 300px;
              background-color: #fff;
              border-radius: 10px;
-             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
-             overflow: hidden; /* Para que la imagen no sobresalga */
+             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+             overflow: hidden;
              transition: transform 0.3s ease;
          }
 
         .servicio:hover {
-          transform: translateY(-5px); /* Efecto sutil de elevación */
+          transform: translateY(-5px);
           box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-
         }
 
         .servicio img {
               width: 100%;
-              height: 200px; /* Altura fija para las imágenes */
-              object-fit: cover; /* Cubre el espacio sin deformar */
-              border-bottom: 3px solid #e78f28; /* Borde naranja */
+              height: 200px;
+              object-fit: cover;
+              border-bottom: 3px solid #e78f28;
           }
 
           .servicio-info {
@@ -159,11 +170,11 @@
 
           .servicio h3 {
                 margin-bottom: 10px;
-                font-size: 1.4em; /* Aumenta el tamaño del título un poco */
+                font-size: 1.4em;
           }
 
           .servicio p {
-              color: #666; /* Gris oscuro para la descripción */
+              color: #666;
               font-size: 1em;
               line-height: 1.4;
           }
@@ -172,20 +183,19 @@
           .sobre-nosotros {
             padding: 60px 20px;
             text-align: center;
-            background-color: #f8f5f0; /* Beige muy claro para el fondo */
+            background-color: #f8f5f0;
            }
 
            .sobre-nosotros h2 {
                 margin-bottom: 30px;
-                color: #c79227;
             }
 
             .sobre-nosotros p {
                 font-size: 1.1em;
                 line-height: 1.6;
-                max-width: 800px; /* Ancho máximo para el texto */
-                margin: 0 auto; /* Centra el bloque de texto */
-                color: #555; /* Un gris oscuro, pero no negro puro */
+                max-width: 800px;
+                margin: 0 auto;
+                color: #555;
              }
 
         /* --- Sección de Contacto --- */
@@ -193,7 +203,7 @@
           background-color:#e78f28;
             padding: 40px 20px;
             text-align: center;
-            color:#f8f5f0;
+
         }
         .contacto h2{
           color:#f8f5f0;
@@ -201,7 +211,8 @@
 
         .contacto p {
             margin-bottom: 20px;
-            color: #f8f5f0;
+             color:#f8f5f0;
+
         }
 
         .info-contacto p {
@@ -217,7 +228,7 @@
         }
         /* --- Pie de Página (Footer) --- */
           footer {
-            background-color: #2d2d2d; /* Gris muy oscuro, casi negro */
+            background-color: #2d2d2d;
             color: #fff;
             text-align: center;
             padding: 20px 0;
@@ -229,7 +240,7 @@
           }
 
           footer a {
-                color: #e78f28; /* Naranja para los enlaces */
+                color: #e78f28;
                 text-decoration: none;
           }
 
@@ -237,14 +248,39 @@
                   text-decoration: underline;
            }
 
+           /*Boton cambio idioma*/
+
+        .language-switcher {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 1000; /* Asegura que esté por encima de otros elementos */
+
+        }
+
+        .language-switcher button {
+            background-color: #e78f28;
+            color: white;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 5px; /* Espacio entre botones */
+            font-size: 1rem;
+            font-weight: bold;
+        }
+        .language-switcher button:hover{
+            background-color: #c77a27;
+
+        }
 
         /* --- Media Queries (para diseño responsive) --- */
 
         /* Tablets */
         @media (max-width: 768px) {
             .servicios {
-                flex-direction: column; /* Apila los servicios verticalmente */
-                align-items: center; /* Centra los elementos */
+                flex-direction: column;
+                align-items: center;
             }
             .servicio {
               flex: 0 1 80%;
@@ -255,7 +291,7 @@
         /* Móviles */
         @media (max-width: 480px) {
             nav ul li {
-                display: block; /* Apila los enlaces de navegación */
+                display: block;
                 margin: 10px 0;
             }
             .hero{
@@ -269,99 +305,116 @@
               font-size: 1em;
             }
             .servicio {
-                flex: 0 1 100%; /* Ocupa todo el ancho */
+                flex: 0 1 100%;
                 max-width: 95%;
+            }
+            #logo-texto{
+                font-size: 3rem;
             }
         }
     </style>
 
-     <!--Aquí comienzan los iconos, pero necesitaría que me facilitaras la libreria desde la que trabajar-->
+     <!--Iconos Font Awesome-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
 </head>
 <body>
+    <div class="language-switcher">
+        <button onclick="changeLanguage('es')">ES</button>
+        <button onclick="changeLanguage('ca')">CA</button>
+    </div>
+
     <div class="contenedor">
         <header>
-            <img id="logo" src="PonTuLogoAqui.png" alt="Logo totCOS"> <!-- Necesito la URL de tu logo -->
-            <h1>totCOS</h1>
-            <p>Centro de Estética y Bienestar</p>
+            <a id="logo-texto" href="/">totCOS</a> <!-- Logo como texto con enlace a la home -->
+            <p class="idioma" data-es="Centro de Estética y Bienestar" data-ca="Centre d'Estètica i Benestar">Centro de Estética y Bienestar</p>
 
             <nav>
                 <ul>
-                    <li><a href="#inicio">Inicio</a></li>
-                    <li><a href="#servicios">Servicios</a></li>
-                    <li><a href="#sobre-nosotros">Sobre Nosotros</a></li>
-                    <li><a href="#contacto">Contacto</a></li>
+                    <li><a href="#inicio" class="idioma"  data-es="Inicio" data-ca="Inici">Inicio</a></li>
+                    <li><a href="#servicios" class="idioma"  data-es="Servicios" data-ca="Serveis">Servicios</a></li>
+                    <li><a href="#sobre-nosotros" class="idioma"  data-es="Sobre Nosotros" data-ca="Sobre Nosaltres">Sobre Nosotros</a></li>
+                    <li><a href="#contacto" class="idioma"  data-es="Contacto" data-ca="Contacte">Contacto</a></li>
                 </ul>
             </nav>
         </header>
 
         <section id="inicio" class="hero">
-            <h2>Descubre la Belleza en Armonía</h2>
-            <p>Sumérgete en un oasis de tranquilidad y renueva tu belleza interior y exterior.</p>
-            <a href="#contacto" class="boton-hero">Reserva tu Cita</a>
+            <h2 class="idioma" data-es="Descubre la Belleza en Armonía" data-ca="Descobreix la Bellesa en Harmonia">Descubre la Belleza en Armonía</h2>
+            <p class="idioma" data-es="Sumérgete en un oasis de tranquilidad y renueva tu belleza interior y exterior en el corazón de Barcelona." data-ca="Submergeix-te en un oasi de tranquil·litat i renova la teva bellesa interior i exterior al cor de Barcelona.">Sumérgete en un oasis de tranquilidad y renueva tu belleza interior y exterior en el corazón de Barcelona.</p>
+            <a href="#contacto" class="boton-hero idioma" data-es="Reserva tu Cita" data-ca="Reserva la teva Cita">Reserva tu Cita</a>
         </section>
 
         <section id="servicios" class="servicios">
-            <!-- Ejemplo de un servicio (Repite y adapta según tus tratamientos)-->
+            <!-- Servicio 1: Masaje -->
             <div class="servicio">
-              <img src="imagen-masaje.jpg" alt="Masaje Relajante"> <!-- Necesito URLs de imágenes o descripciones -->
+              <img src="https://images.pexels.com/photos/450441/pexels-photo-450441.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Masaje Relajante">
                 <div class="servicio-info">
-                    <h3>Masaje Relajante</h3>
-                    <p>Libera tensiones y reduce el estrés con nuestro masaje relajante de cuerpo completo.</p>
+                    <h3 class="idioma" data-es="Masaje Relajante" data-ca="Massatge Relaxant">Masaje Relajante</h3>
+                    <p class="idioma" data-es="Libera tensiones y reduce el estrés con nuestro masaje relajante de cuerpo completo, realizado con técnicas expertas y aceites esenciales." data-ca="Allibera tensions i redueix l'estrès amb el nostre massatge relaxant de cos complet, realitzat amb tècniques expertes i olis essencials.">Libera tensiones y reduce el estrés con nuestro masaje relajante de cuerpo completo, realizado con técnicas expertas y aceites esenciales.</p>
                 </div>
             </div>
 
+            <!-- Servicio 2: Ayurveda -->
             <div class="servicio">
-                <img src="imagen-facial.jpg" alt="Tratamiento Facial"> <!-- Necesito URLs de imágenes o descripciones -->
+                <img src="https://images.pexels.com/photos/9409258/pexels-photo-9409258.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Tratamiento Ayurveda">
                   <div class="servicio-info">
-                      <h3>Tratamiento Facial Personalizado</h3>
-                      <p>Revitaliza tu piel con un tratamiento facial adaptado a tus necesidades específicas.</p>
+                      <h3 class="idioma" data-es="Tratamiento Ayurveda" data-ca="Tractament Ayurveda">Tratamiento Ayurveda</h3>
+                      <p class="idioma" data-es="Experimenta el equilibrio y la armonía con nuestros tratamientos Ayurveda personalizados, basados en la antigua medicina tradicional india." data-ca="Experimenta l'equilibri i l'harmonia amb els nostres tractaments Ayurveda personalitzats, basats en l'antiga medicina tradicional índia.">Experimenta el equilibrio y la armonía con nuestros tratamientos Ayurveda personalizados, basados en la antigua medicina tradicional india.</p>
                   </div>
               </div>
 
+              <!-- Servicio 3: Manicura -->
               <div class="servicio">
-                <img src="imagen-manicura.jpg" alt="Manicura y Pedicura"> <!-- Necesito URLs de imágenes o descripciones -->
+                <img src="https://images.pexels.com/photos/3997991/pexels-photo-3997991.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Manicura">
                   <div class="servicio-info">
-                      <h3>Manicura y Pedicura Spa</h3>
-                      <p>Embellece tus manos y pies con nuestros servicios de manicura y pedicura de lujo.</p>
+                      <h3 class="idioma" data-es="Manicura Spa" data-ca="Manicura Spa">Manicura Spa</h3>
+                      <p class="idioma" data-es="Embellece tus manos con nuestra manicura spa de lujo, que incluye exfoliación, hidratación y un esmaltado impecable." data-ca="Embelleix les teves mans amb la nostra manicura spa de luxe, que inclou exfoliació, hidratació i un esmaltat impecable.">Embellece tus manos con nuestra manicura spa de lujo, que incluye exfoliación, hidratación y un esmaltado impecable.</p>
                   </div>
               </div>
-
-              <!--Añade más aquí, dime cuántos necesitas-->
-
         </section>
 
         <section id="sobre-nosotros" class="sobre-nosotros">
-             <h2>Nuestra Filosofía</h2>
-              <!-- Necesito un texto sobre tu centro, su filosofía, etc. -->
-             <p>En totCOS, creemos que la belleza es un reflejo del bienestar interior. Nos dedicamos a proporcionar tratamientos de alta calidad en un ambiente sereno y acogedor, utilizando productos naturales y técnicas avanzadas para realzar tu belleza natural y promover la relajación profunda.</p>
+             <h2 class="idioma" data-es="Nuestra Filosofía" data-ca="La Nostra Filosofia">Nuestra Filosofía</h2>
+             <p class="idioma" data-es="En totCOS, un rincón de paz en el bullicioso corazón de Barcelona, creemos que cada cliente es único.  Meritxell, nuestra terapeuta con más de 12 años de experiencia, te guiará en un viaje de bienestar personalizado.  Nuestro objetivo es que encuentres un espacio de serenidad y renovación, donde la belleza exterior se une con el equilibrio interior. Utilizamos productos de alta calidad y técnicas avanzadas para ofrecerte una experiencia revitalizante y transformadora." data-ca="A totCOS, un racó de pau en el bulliciós cor de Barcelona, creiem que cada client és únic. La Meritxell, la nostra terapeuta amb més de 12 anys d'experiència, et guiarà en un viatge de benestar personalitzat. El nostre objectiu és que trobis un espai de serenitat i renovació, on la bellesa exterior s'uneix amb l'equilibri interior. Utilitzem productes d'alta qualitat i tècniques avançades per oferir-te una experiència revitalitzant i transformadora.">En totCOS, un rincón de paz en el bullicioso corazón de Barcelona, creemos que cada cliente es único.  Meritxell, nuestra terapeuta con más de 12 años de experiencia, te guiará en un viaje de bienestar personalizado.  Nuestro objetivo es que encuentres un espacio de serenidad y renovación, donde la belleza exterior se une con el equilibrio interior. Utilizamos productos de alta calidad y técnicas avanzadas para ofrecerte una experiencia revitalizante y transformadora.</p>
           </section>
 
         <section id="contacto" class="contacto">
-            <h2>Contáctanos</h2>
-             <!-- Necesito la dirección, teléfono, email, etc. -->
+            <h2 class="idioma" data-es="Contáctanos" data-ca="Contacta'ns">Contáctanos</h2>
             <div class="info-contacto">
-                <p><i class="fas fa-map-marker-alt"></i>  Calle Ejemplo, 123, Ciudad, País</p>
-                <p><i class="fas fa-phone"></i>  +34 123 456 789</p>
-                <p><i class="fas fa-envelope"></i>  info@totcos.com</p>
+                <p><i class="fas fa-map-marker-alt"></i>  Passeig Maragall 265, Barcelona</p>
+                <p><i class="fas fa-phone"></i>  935 049 194</p>
+                <p><i class="fas fa-envelope"></i>  totcoscentre@gmail.com</p>
+                <p><i class="fas fa-clock"></i><span class="idioma" data-es="Horario con cita previa" data-ca="Horari amb cita prèvia">Horario con cita previa</span></p>
 
             </div>
         </section>
-    </div><!--Cierre del contenedor -->
+    </div>
 
     <footer>
       <p>© 2024 totCOS - Todos los derechos reservados</p>
-      <p>Diseñado por tu nombre o empresa (opcional)</p>
-      <!-- Si tienes redes sociales, pon los enlaces aquí
-      <p>
-        <a href="#"><i class="fab fa-facebook"></i></a>
-        <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-twitter"></i></a>
-      </p>
-      -->
-
+      <p>Diseñado por ... (opcional)</p>
     </footer>
+
+    <script>
+        function changeLanguage(lang) {
+            const elements = document.querySelectorAll('.idioma');
+            elements.forEach(el => {
+                const text = el.dataset[lang];
+                if (text) {
+                    el.textContent = text;
+                }
+            });
+
+            // Cambiar el atributo lang de la etiqueta html (buena práctica para SEO)
+            document.documentElement.lang = lang;
+        }
+         // Establecer el idioma predeterminado al cargar la página
+        document.addEventListener('DOMContentLoaded', () => {
+           changeLanguage('es');
+        });
+
+    </script>
 
 </body>
 </html>
