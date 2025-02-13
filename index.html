@@ -88,36 +88,29 @@
             color: #fff;
         }
 
-        /* --- Sección Hero (Carrusel) --- */
-         .hero {
-            position: relative;
-            overflow: hidden;
-            width: 100%;
-            /* Eliminamos max-height de aquí */
+       /* --- Sección Hero (Carrusel) --- */
+        .hero {
+          position: relative;
+          overflow: hidden;
+          width: 100%;
+          height: 500px; /* Altura fija para el carrusel */
+
         }
 
         .carrusel {
             display: flex;
             transition: transform 0.8s ease-in-out;
-            width: 400%; /* 4 imágenes */
+            width: 400%;  /* 4 imágenes * 100% */
+            height: 100%; /* Ocupa toda la altura del .hero */
+
         }
 
-        .carrusel-item { /* Nuevo contenedor para cada imagen */
-          flex: 0 0 25%; /* Cada item ocupa el 25% del ancho */
-          width: 25%;    /* Importante: Establecer el ancho también */
-          position: relative; /* Para el truco del padding */
-          padding-bottom: 56.25%; /* Relación de aspecto 16:9 (9 / 16 = 0.5625) */
-                                /*  Cambia este valor para otras proporciones */
-        }
-
-        .carrusel img {
-            position: absolute; /* Absoluto dentro de .carrusel-item */
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: contain; /* Muestra la imagen completa, sin recortar */
-            object-position: center;
+         .carrusel img {
+            width: 25%; /* Cada imagen ocupa 1/4 del ancho total */
+            height: 100%; /* Ajusta a la altura del carrusel */
+            object-fit: cover; /* Cubre el espacio sin deformar */
+            object-position: center; /* Centra la imagen */
+            flex-shrink: 0; /* Evita que las imágenes se encojan */
         }
         .hero-overlay {
           position: absolute;
@@ -262,6 +255,18 @@
             margin: 10px;
             color:#f8f5f0;
 
+        }
+          /* Google Maps */
+        .mapa-google {
+            margin-top: 30px; /* Espacio por encima del mapa */
+            text-align: center; /* Centra el mapa */
+        }
+
+        .mapa-google iframe {
+            width: 100%; /* Ancho completo */
+            max-width: 600px; /* Ancho máximo */
+            height: 400px; /* Altura fija */
+            border: 0; /* Quita el borde */
         }
 
         /* --- Pie de Página y Síguenos en Instagram --- */
@@ -426,6 +431,9 @@
             #logo-texto{
                 font-size: 3rem;
             }
+            .mapa-google iframe{
+                height: 300px;
+            }
         }
     </style>
 
@@ -465,19 +473,10 @@
 
         <section id="inicio" class="hero">
              <div class="carrusel">
-                <!-- Cada imagen DENTRO de un div class="carrusel-item" -->
-                <div class="carrusel-item">
-                    <img src="https://lh3.googleusercontent.com/gps-cs-s/AB5caB9OhJvI96SmIiBs3qzmNNzkHDRxuQlCbJQXLop99UNjrk2_M4tekf5AnINYN_BXwF0yRqflm9HQfZoLdWwr8flz-VcFm0xU8yVmjg39w9hyxdEWi_IKI1fn7uQN3I_r5vgi-pLy8Q=s680-w680-h510" alt="Imagen 1">
-                </div>
-                <div class="carrusel-item">
-                    <img src="https://lh3.googleusercontent.com/p/AF1QipNARNbR97JQL6o7J9u3FcI-JZ73U3q4NRdAo7-7=s680-w680-h510" alt="Imagen 2">
-                </div>
-                <div class="carrusel-item">
-                    <img src="https://lh3.googleusercontent.com/p/AF1QipOmoidZ71QPTTHXgJNKnYSFVz5ab18_JIBYgECC=s680-w680-h510" alt="Imagen 3">
-                </div>
-                <div class="carrusel-item">
-                   <img src="https://lh3.googleusercontent.com/p/AF1QipOvsmfKNxTeI1mXSRctXxvO3ucyO4z6HRgayrz4=s680-w680-h510" alt="Imagen 4">
-                </div>
+                <img src="https://lh3.googleusercontent.com/gps-cs-s/AB5caB9OhJvI96SmIiBs3qzmNNzkHDRxuQlCbJQXLop99UNjrk2_M4tekf5AnINYN_BXwF0yRqflm9HQfZoLdWwr8flz-VcFm0xU8yVmjg39w9hyxdEWi_IKI1fn7uQN3I_r5vgi-pLy8Q=s680-w680-h510" alt="Imagen 1">
+                <img src="https://lh3.googleusercontent.com/p/AF1QipNARNbR97JQL6o7J9u3FcI-JZ73U3q4NRdAo7-7=s680-w680-h510" alt="Imagen 2">
+                <img src="https://lh3.googleusercontent.com/p/AF1QipOmoidZ71QPTTHXgJNKnYSFVz5ab18_JIBYgECC=s680-w680-h510" alt="Imagen 3">
+                <img src="https://lh3.googleusercontent.com/p/AF1QipOvsmfKNxTeI1mXSRctXxvO3ucyO4z6HRgayrz4=s680-w680-h510" alt="Imagen 4">
             </div>
             <div class="hero-overlay">
               <h2 class="idioma" data-es="Descubre la Belleza en Armonía" data-ca="Descobreix la Bellesa en Harmonia">Descubre la Belleza en Armonía</h2>
@@ -528,6 +527,10 @@
                 <p><i class="fas fa-envelope"></i> totcoscentre@gmail.com</p>
                 <p><i class="fas fa-clock"></i><span class="idioma" data-es="Horario con cita previa" data-ca="Horari amb cita prèvia">Horario con cita previa</span></p>
             </div>
+             <!-- Google Maps -->
+            <div class="mapa-google">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2992.759685345186!2d2.1781984764784966!3d41.39894969894825!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a4a327e45a1985%3A0x85329615b4984d58!2sPasseig%20de%20Maragall%2C%20265%2C%20Horta-Guinard%C3%B3%2C%2008032%20Barcelona!5e0!3m2!1ses!2ses!4v1718734293669!5m2!1ses!2ses" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
         </section>
     </div>
 
@@ -558,4 +561,22 @@
         // --- Carrusel ---
         let indiceImagen = 0;
         const carrusel = document.querySelector('.carrusel');
-        const totalImagenes = document.querySelectorAll('.c
+        const totalImagenes = document.querySelectorAll('.carrusel img').length; // Cuenta las imágenes
+
+        function mostrarImagen(indice) {
+          const desplazamiento = -indice * (100 / totalImagenes); //  Desplazamiento
+          carrusel.style.transform = `translateX(${desplazamiento}%)`;
+        }
+
+        function siguienteImagen() {
+            indiceImagen = (indiceImagen + 1) % totalImagenes; // Usa el total de imágenes
+            mostrarImagen(indiceImagen);
+        }
+        // Cambiar la imagen cada 5 segundos (5000 milisegundos)
+        setInterval(siguienteImagen, 5000);
+        // Mostrar la primera imagen al cargar la página
+        mostrarImagen(0);
+
+    </script>
+</body>
+</html>
