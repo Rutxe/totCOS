@@ -253,9 +253,9 @@
         .siguenos-instagram a {
             color: #e78f28;
             text-decoration: none;
-            font-size: 1.5em; /* Tamaño más grande */
+            font-size: 1.5em;
             font-weight: bold;
-            display: inline-block; /* Para aplicar margen */
+            display: inline-block;
             padding: 10px 20px;
             border-radius: 5px;
             transition: background-color 0.3s, color 0.3s;
@@ -265,13 +265,13 @@
         .siguenos-instagram a:hover {
             background-color: #e78f28;
             color: #fff;
-             text-decoration: none; /* Quita el subrayado en hover */
+             text-decoration: none;
 
         }
 
         .siguenos-instagram i {
-            margin-right: 8px; /* Espacio entre el icono y el texto */
-            font-size: 2em; /* Icono más grande */
+            margin-right: 8px;
+            font-size: 2em;
 
         }
 
@@ -281,7 +281,7 @@
             position: absolute;
             top: 20px;
             right: 20px;
-            z-index: 1000; /* Asegura que esté por encima de otros elementos */
+            z-index: 1000;
 
         }
 
@@ -292,7 +292,7 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            margin-left: 5px; /* Espacio entre botones */
+            margin-left: 5px;
             font-size: 1rem;
             font-weight: bold;
         }
@@ -313,7 +313,7 @@
               max-width: 80%;
             }
              .language-switcher {
-                position: static; /* En pantallas pequeñas, los botones se mostrarán en el flujo normal */
+                position: static;
                 margin-bottom: 10px;
                 text-align: center;
             }
@@ -357,7 +357,7 @@
 
     <div class="contenedor">
         <header>
-            <a id="logo-texto" href="#">totCOS</a>
+            <a id="logo-texto" href="#">totCOS</a> <!--  href="#" temporal -->
             <p class="idioma" data-es="Centro de Estética y Bienestar" data-ca="Centre d'Estètica i Benestar">Centro de Estética y Bienestar</p>
             <nav>
                 <ul>
@@ -447,10 +447,8 @@
            changeLanguage('es');
         });
 
-        // Obtener la URL base
+        // Obtener la URL base y corregir el enlace del logo
         const baseUrl = window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/')) + '/';
-
-        // Establecer el href del logo
         document.getElementById('logo-texto').href = baseUrl;
 
     </script>
