@@ -5,21 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>totCOS - Servicios y Productos</title>
     <style>
-        /* --- Estilos Generales (Reutiliza los estilos de index.html) --- */
+        /* --- Estilos Generales --- */
         body {
             font-family: sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f8f5f0; /* Beige claro */
-            color: #4a3a2a; /* Marrón oscuro */
+            background-color: #f8f5f0;
+            color: #4a3a2a;
         }
 
         h1, h2, h3 {
             font-family: "Segoe Script", cursive;
-            color: #c79227; /* Dorado */
+            color: #c79227;
             text-align: center;
         }
-         h1{
+        h1{
             font-size: 3rem;
         }
         h2{
@@ -33,23 +33,22 @@
             padding: 20px;
         }
 
-          /* --- Encabezado (Header) --- */
+        /* --- Encabezado (Header) --- */
         header {
             background-color: #f8f5f0;
-            padding: 25px; /* Más espacio alrededor del encabezado */
+            padding: 25px;
             text-align: center;
-            border-bottom: 3px solid #e78f28; /* Línea naranja debajo del encabezado */
-
-         }
+            border-bottom: 3px solid #e78f28;
+        }
 
         /* Logo como texto */
         #logo-texto {
             font-family: "Segoe Script", cursive;
-            font-size: 4rem; /* Tamaño grande para el logo */
-            color: #e78f28; /* Naranja principal */
+            font-size: 4rem;
+            color: #e78f28;
             margin-bottom: 10px;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Sombra sutil */
-            display: block; /* Asegura que ocupe todo el ancho */
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+            display: block;
             text-align: center;
         }
         #logo-texto:hover{
@@ -58,12 +57,11 @@
 
         header p {
             font-size: 1.1em;
-            color: #777; /* Gris más suave para el subtítulo */
+            color: #777;
             margin-bottom: 20px;
-
         }
 
-        /* --- Barra de Navegación (Nav) --- */
+        /* --- Barra de Navegación --- */
         nav ul {
             list-style: none;
             padding: 0;
@@ -90,43 +88,11 @@
             color: #fff;
         }
 
-        /* --- Sección de Artículos --- */
-        .articulos {
-            padding: 40px 0;
-            text-align: center;
-        }
-
-        .articulos h2 {
-            margin-bottom: 30px;
-             color: #c79227;
-        }
-
-        .articulo {
-            margin-bottom: 40px;
-            /* Estilos adicionales para cada artículo */
-            border-bottom: 1px solid #ddd;
-            padding-bottom: 20px;
-        }
-
-        .articulo h3 {
-             color: #c79227;
-            margin-bottom: 10px;
-        }
-
-        .articulo p {
-            font-size: 1em;
-            line-height: 1.5;
-            color: #555;
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: left;
-        }
-
         /* --- Sección de Productos --- */
         .productos {
             padding: 40px 0;
             text-align: center;
-            background-color: #f8f5f0;
+            background-color: #f8f5f0; /* Fondo beige */
         }
 
         .productos h2 {
@@ -136,56 +102,58 @@
 
         .productos-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Diseño adaptable */
-            gap: 20px;
-            justify-content: center; /* Centra los elementos */
-            max-width: 1200px; /* Ancho máximo */
-            margin: 0 auto; /* Centra el grid */
-
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Más ancho para móviles */
+            gap: 30px; /* Más espacio entre productos */
+            justify-content: center;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .producto {
             background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            padding: 15px;
+            border-radius: 12px; /* Bordes más redondeados */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Sombra más pronunciada */
+            padding: 20px; /* Más espacio interno */
             text-align: center;
-            transition: transform 0.2s ease; /* Transición suave */
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transiciones más suaves */
+            overflow: hidden; /* Para evitar que el contenido sobresalga */
         }
-        .producto:hover{
-            transform: translateY(-5px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 
+        .producto:hover {
+            transform: translateY(-8px); /* Mayor elevación */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         }
 
         .producto img {
             width: 100%;
-            max-height: 200px; /* Altura máxima para las imágenes */
-            object-fit: contain; /* Ajusta la imagen sin deformarla */
-            border-bottom: 2px solid #eee;
-            margin-bottom: 10px;
-             border-radius: 8px;
+            max-height: 250px; /* Aumenté la altura máxima */
+            object-fit: contain;
+            border-bottom: 3px solid #e78f28; /* Borde inferior naranja */
+            margin-bottom: 15px; /* Más espacio */
+            border-radius: 8px; /* Bordes redondeados para la imagen */
         }
 
         .producto h3 {
-            font-size: 1.2em;
-            margin-bottom: 5px;
-             color: #c79227;
-
+            font-size: 1.3em; /* Título más grande */
+            margin-bottom: 8px;
+            color: #c79227;
+            font-weight: bold; /* Título en negrita */
         }
 
-        .producto p {
+        .producto .descripcion { /* Clase específica para la descripción */
             font-size: 1em;
-            color: #777;
-            margin-bottom: 10px;
+            color: #555;
+            margin-bottom: 12px;
+            line-height: 1.4; /* Mejor legibilidad */
         }
 
         .producto .precio {
             font-weight: bold;
-            color: #e78f28; /* Naranja para el precio */
-            font-size: 1.1em;
+            color: #e78f28;
+            font-size: 1.2em; /* Precio más grande */
+            margin-top: 10px; /* Espacio por encima del precio */
         }
-         /* --- Pie de Página (Footer) --- */
+           /* --- Pie de Página (Footer) --- */
           footer {
             background-color: #2d2d2d;
             color: #fff;
@@ -206,8 +174,7 @@
           footer a:hover {
                   text-decoration: underline;
            }
-
-               /*Boton cambio idioma*/
+                   /*Boton cambio idioma*/
 
         .language-switcher {
             position: absolute;
@@ -234,16 +201,13 @@
         }
 
         /* --- Media Queries --- */
-        /* Tablets */
-        @media (max-width: 768px) {
+         @media (max-width: 768px) {
             .language-switcher {
                 position: static; /* En pantallas pequeñas, los botones se mostrarán en el flujo normal */
                 margin-bottom: 10px;
                 text-align: center;
             }
-            .productos-grid{
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            }
+
         }
         /* Movil */
         @media (max-width: 480px) {
@@ -251,115 +215,59 @@
                 font-size: 3rem;
             }
         }
-
     </style>
-     <!--Iconos Font Awesome-->
+
+    <!-- Iconos Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
+
     <div class="language-switcher">
         <button onclick="changeLanguage('es')">ES</button>
         <button onclick="changeLanguage('ca')">CA</button>
     </div>
+
     <div class="contenedor">
         <header>
-             <a id="logo-texto" href="/">totCOS</a>
+            <a id="logo-texto" href="/">totCOS</a>
             <p class="idioma" data-es="Centro de Estética y Bienestar" data-ca="Centre d'Estètica i Benestar">Centro de Estética y Bienestar</p>
             <nav>
                 <ul>
-                    <!-- Enlace a la página principal -->
                     <li><a href="index.html" class="idioma" data-es="Inicio" data-ca="Inici">Inicio</a></li>
-                    <!--  Enlace a la misma página, ya que estamos en servicios -->
-                    <li><a href="#servicios" class="idioma" data-es="Servicios" data-ca="Serveis">Servicios</a></li>
-                    <li><a href="index.html#sobre-nosotros" class="idioma" data-es="Sobre Nosotros" data-ca="Sobre Nosaltres">Sobre Nosotros</a></li> <!-- Vuelve a index.html -->
-                    <li><a href="index.html#contacto" class="idioma" data-es="Contacto" data-ca="Contacte">Contacto</a></li> <!-- Vuelve a index.html -->
+                    <li><a href="#productos" class="idioma" data-es="Servicios" data-ca="Serveis">Servicios</a></li>
+                    <li><a href="index.html#sobre-nosotros" class="idioma" data-es="Sobre Nosotros" data-ca="Sobre Nosaltres">Sobre Nosotros</a></li>
+                    <li><a href="index.html#contacto" class="idioma" data-es="Contacto" data-ca="Contacte">Contacto</a></li>
                 </ul>
             </nav>
         </header>
 
-        <section id="servicios" class="articulos">
-            <h2>Servicios</h2>
-            <div class="articulo">
-                <h3 class="idioma" data-es="Título del Servicio 1" data-ca="Títol del Servei 1">Título del Servicio 1</h3>
-                <p class="idioma" data-es="Aquí va la descripción del servicio 1.  Puedes añadir detalles sobre el tratamiento, sus beneficios, etc." data-ca="Aquí va la descripció del servei 1. Pots afegir detalls sobre el tractament, els seus beneficis, etc.">Aquí va la descripción del servicio 1.  Puedes añadir detalles sobre el tratamiento, sus beneficios, etc.</p>
-                <!-- Añade más detalles del servicio si quieres (por ejemplo, duración, precio) -->
-            </div>
-
-             <div class="articulo">
-                <h3 class="idioma" data-es="Título del Servicio 2" data-ca="Títol del Servei 2">Título del Servicio 2</h3>
-                <p class="idioma" data-es="Aquí va la descripción del servicio 2." data-ca="Aquí va la descripció del servei 2.">Aquí va la descripción del servicio 2.</p>
-
-            </div>
-
-            <!-- Añade más artículos según sea necesario -->
-        </section>
-
-        <section class="productos">
+        <section id="productos" class="productos">
             <h2 class="idioma" data-es="Nuestros Productos" data-ca="Els Nostres Productes">Nuestros Productos</h2>
             <div class="productos-grid">
-                <!-- Producto 1 -->
+
+                <!-- Producto 1: Reparador Hidratante -->
                 <div class="producto">
-                    <img src="https://cdn.shopify.com/s/files/1/0553/9715/4978/products/cremafacialhidratantepielmixtagrasa_480x480.jpg?v=1680267363" alt="Crema Facial Hidratante Piel Mixta Grasa">
-                    <h3 class="idioma" data-es="Crema Facial Hidratante" data-ca="Crema Facial Hidratant">Crema Facial Hidratante</h3>
-                    <p class="idioma" data-es="Piel Mixta Grasa" data-ca="Pell Mixta Grassa">Piel Mixta Grasa</p>
-                    <p class="precio">34,00€</p>
+                    <img src="https://myskinbarcelona.com/cdn/shop/files/B38A0057-Enhanced-NR_copy.jpg?v=1738866885&width=720" alt="Reparador Hidratante con ADN Marino">
+                    <h3 class="idioma" data-es="Reparador Hidratante con ADN Marino" data-ca="Reparador Hidratant amb ADN Marí">Reparador Hidratante con ADN Marino</h3>
+                    <p class="descripcion idioma" data-es="50ml / 200ml" data-ca="50ml / 200ml">50ml / 200ml</p>
+                    <p class="precio idioma" data-es="85€ / 199€" data-ca="85€ / 199€">85€ / 199€</p>
                 </div>
 
-                <!-- Producto 2 -->
+                <!-- Producto 2: Corecollection -->
                 <div class="producto">
-                    <img src="https://cdn.shopify.com/s/files/1/0553/9715/4978/products/aguamicelarpielsensible_480x480.jpg?v=1680267298" alt="Agua Micelar Piel Sensible">
-                     <h3 class="idioma" data-es="Agua Micelar" data-ca="Aigua Micel·lar">Agua Micelar</h3>
-                    <p class="idioma" data-es="Piel Sensible" data-ca="Pell Sensible">Piel Sensible</p>
-                    <p class="precio">19,00€</p>
+                    <img src="https://myskinbarcelona.com/cdn/shop/files/B38A0358-Enhanced-NRcopy_dcf26a6e-e376-465f-88ad-9833b57210e4.jpg?v=1733228229&width=2160" alt="Corecollection">
+                    <h3 class="idioma" data-es="Corecollection" data-ca="Corecollection">Corecollection</h3>
+                    <p class="descripcion idioma" data-es="" data-ca=""></p>
+                    <p class="precio">150€</p>
                 </div>
 
-                <!-- Producto 3 -->
+                <!-- Producto 3: Sérum Iluminador -->
                 <div class="producto">
-                    <img src="https://cdn.shopify.com/s/files/1/0553/9715/4978/products/serumacidohialuronico_480x480.jpg?v=1680267811" alt="Serum Ácido Hialurónico">
-                    <h3 class="idioma" data-es="Serum Ácido Hialurónico" data-ca="Sèrum Àcid Hialurònic">Serum Ácido Hialurónico</h3>
-                    <p class="idioma" data-es="Todo tipo de piel" data-ca="Tot tipus de pell">Todo tipo de piel</p>
-                    <p class="precio">34,00€</p>
+                    <img src="https://myskinbarcelona.com/cdn/shop/files/B38A0143-Enhanced-NR_copy_2cc440b8-7e76-42a0-a9f0-1411ebba6791.jpg?v=1733230364&width=2160" alt="Sérum Iluminador con Ácido Hialurónico">
+                    <h3 class="idioma" data-es="Sérum Iluminador" data-ca="Sèrum Il·luminador">Sérum Iluminador</h3>
+                     <p class="descripcion idioma" data-es="con Ácido Hialurónico" data-ca="amb Àcid Hialurònic">con Ácido Hialurónico</p>
+                    <p class="precio">85€</p>
                 </div>
-
-                 <!-- Producto 4-->
-                <div class="producto">
-                    <img src="https://cdn.shopify.com/s/files/1/0553/9715/4978/products/cremafacialnutritivapielseca_480x480.jpg?v=1680267417" alt="Crema Facial Nutritiva Piel Seca">
-                    <h3 class="idioma" data-es="Crema Facial Nutritiva" data-ca="Crema Facial Nutritiva">Crema Facial Nutritiva</h3>
-                    <p class="idioma" data-es="Piel Seca" data-ca="Pell Seca">Piel Seca</p>
-                    <p class="precio">36,00€</p>
-                </div>
-
-                <!-- Producto 5 -->
-                <div class="producto">
-                   <img src="https://cdn.shopify.com/s/files/1/0553/9715/4978/products/serumcontornodeojos_480x480.jpg?v=1680267727" alt="Serum Contorno de Ojos">
-                    <h3 class="idioma" data-es="Serum Contorno de Ojos" data-ca="Sèrum Contorn d'Ulls">Serum Contorno de Ojos</h3>
-                    <p class="idioma" data-es="Todo tipo de piel" data-ca="Tot tipus de pell">Todo tipo de piel</p>
-                    <p class="precio">32,00€</p>
-                </div>
-
-                <!-- Producto 6 -->
-                <div class="producto">
-                    <img src="https://cdn.shopify.com/s/files/1/0553/9715/4978/products/geldesmaquillantepielmixtagrasa_480x480.jpg?v=1680267515" alt="Gel Desmaquillante Piel Mixta Grasa">
-                   <h3 class="idioma" data-es="Gel Desmaquillante" data-ca="Gel Desmaquillant">Gel Desmaquillante</h3>
-                    <p class="idioma" data-es="Piel Mixta Grasa" data-ca="Pell Mixta Grassa">Piel Mixta Grasa</p>
-                    <p class="precio">21,00€</p>
-                </div>
-
-                 <!-- Producto 7 -->
-                <div class="producto">
-                   <img src="https://cdn.shopify.com/s/files/1/0553/9715/4978/products/serumexfoliantepielmixtagrasa_480x480.jpg?v=1680267649" alt="Sérum Exfoliante Piel Mixta Grasa">
-                    <h3 class="idioma" data-es="Sérum Exfoliante" data-ca="Sèrum Exfoliant">Sérum Exfoliante</h3>
-                    <p class="idioma" data-es="Piel Mixta Grasa" data-ca="Pell Mixta Grassa">Piel Mixta Grasa</p>
-                    <p class="precio">32,00€</p>
-                </div>
-                <!--Producto 8-->
-                <div class="producto">
-                     <img src="https://cdn.shopify.com/s/files/1/0553/9715/4978/products/cremafacialhidratantepielseca_480x480.jpg?v=1680267331" alt=">Crema Facial Hidratante Piel Seca">
-                    <h3 class="idioma" data-es="Crema Facial Hidratante" data-ca="Crema Facial Hidratant">Crema Facial Hidratante</h3>
-                    <p class="idioma" data-es="Piel Seca" data-ca="Pell Seca">Piel Seca</p>
-                    <p class="precio">32,00€</p>
-                </div>
-
             </div>
         </section>
     </div>
@@ -379,9 +287,8 @@
                     el.textContent = text;
                 }
             });
-            document.documentElement.lang = lang; // Buena práctica SEO
+            document.documentElement.lang = lang;
         }
-         // Establecer el idioma predeterminado al cargar la página
         document.addEventListener('DOMContentLoaded', () => {
            changeLanguage('es');
         });
