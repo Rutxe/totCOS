@@ -88,31 +88,37 @@
             color: #fff;
         }
 
-       /* --- Sección Hero (Carrusel) --- */
-        .hero {
-            position: relative; /* Necesario para posicionar los controles */
-            overflow: hidden; /* Oculta las imágenes que no se muestran */
+        /* --- Sección Hero (Carrusel) --- */
+         .hero {
+            position: relative;
+            overflow: hidden;
             width: 100%;
-            max-height: 600px; /* Ajusta la altura máxima del carrusel */
-
+            /* Eliminamos max-height de aquí */
         }
 
         .carrusel {
             display: flex;
-            transition: transform 0.8s ease-in-out; /* Transición suave */
-            width: 400%; /* Ancho total (4 imágenes * 100%) */
+            transition: transform 0.8s ease-in-out;
+            width: 400%; /* 4 imágenes */
+        }
 
+        .carrusel-item { /* Nuevo contenedor para cada imagen */
+          flex: 0 0 25%; /* Cada item ocupa el 25% del ancho */
+          width: 25%;    /* Importante: Establecer el ancho también */
+          position: relative; /* Para el truco del padding */
+          padding-bottom: 56.25%; /* Relación de aspecto 16:9 (9 / 16 = 0.5625) */
+                                /*  Cambia este valor para otras proporciones */
         }
 
         .carrusel img {
-            width: 100%; /* Cada imagen ocupa el 100% del contenedor .carrusel */
-            height: auto;
-            object-fit: cover; /* Cubre el espacio sin deformar */
-            object-position: center; /*Centra*/
-            flex: 0 0 25%; /* Distribución equitativa*/
-
+            position: absolute; /* Absoluto dentro de .carrusel-item */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* Muestra la imagen completa, sin recortar */
+            object-position: center;
         }
-
         .hero-overlay {
           position: absolute;
           top: 0;
@@ -459,10 +465,19 @@
 
         <section id="inicio" class="hero">
              <div class="carrusel">
-                <img src="https://lh3.googleusercontent.com/gps-cs-s/AB5caB9OhJvI96SmIiBs3qzmNNzkHDRxuQlCbJQXLop99UNjrk2_M4tekf5AnINYN_BXwF0yRqflm9HQfZoLdWwr8flz-VcFm0xU8yVmjg39w9hyxdEWi_IKI1fn7uQN3I_r5vgi-pLy8Q=s680-w680-h510" alt="Imagen 1">
-                <img src="https://lh3.googleusercontent.com/p/AF1QipNARNbR97JQL6o7J9u3FcI-JZ73U3q4NRdAo7-7=s680-w680-h510" alt="Imagen 2">
-                <img src="https://lh3.googleusercontent.com/p/AF1QipOmoidZ71QPTTHXgJNKnYSFVz5ab18_JIBYgECC=s680-w680-h510" alt="Imagen 3">
-                <img src="https://lh3.googleusercontent.com/p/AF1QipOvsmfKNxTeI1mXSRctXxvO3ucyO4z6HRgayrz4=s680-w680-h510" alt="Imagen 4">
+                <!-- Cada imagen DENTRO de un div class="carrusel-item" -->
+                <div class="carrusel-item">
+                    <img src="https://lh3.googleusercontent.com/gps-cs-s/AB5caB9OhJvI96SmIiBs3qzmNNzkHDRxuQlCbJQXLop99UNjrk2_M4tekf5AnINYN_BXwF0yRqflm9HQfZoLdWwr8flz-VcFm0xU8yVmjg39w9hyxdEWi_IKI1fn7uQN3I_r5vgi-pLy8Q=s680-w680-h510" alt="Imagen 1">
+                </div>
+                <div class="carrusel-item">
+                    <img src="https://lh3.googleusercontent.com/p/AF1QipNARNbR97JQL6o7J9u3FcI-JZ73U3q4NRdAo7-7=s680-w680-h510" alt="Imagen 2">
+                </div>
+                <div class="carrusel-item">
+                    <img src="https://lh3.googleusercontent.com/p/AF1QipOmoidZ71QPTTHXgJNKnYSFVz5ab18_JIBYgECC=s680-w680-h510" alt="Imagen 3">
+                </div>
+                <div class="carrusel-item">
+                   <img src="https://lh3.googleusercontent.com/p/AF1QipOvsmfKNxTeI1mXSRctXxvO3ucyO4z6HRgayrz4=s680-w680-h510" alt="Imagen 4">
+                </div>
             </div>
             <div class="hero-overlay">
               <h2 class="idioma" data-es="Descubre la Belleza en Armonía" data-ca="Descobreix la Bellesa en Harmonia">Descubre la Belleza en Armonía</h2>
@@ -517,7 +532,7 @@
     </div>
 
     <footer>
-      <p>© 2024 totCOS - Todos los derechos reservados</p>
+      <p>© 2025 totCOS - Todos los derechos reservados</p>
       <p>Diseñado por Art Rutxe</p>
     </footer>
 
@@ -543,22 +558,4 @@
         // --- Carrusel ---
         let indiceImagen = 0;
         const carrusel = document.querySelector('.carrusel');
-        const totalImagenes = document.querySelectorAll('.carrusel img').length; // Cuenta las imágenes
-
-        function mostrarImagen(indice) {
-          const desplazamiento = -indice * (100 / totalImagenes); //  Desplazamiento
-          carrusel.style.transform = `translateX(${desplazamiento}%)`;
-        }
-
-        function siguienteImagen() {
-            indiceImagen = (indiceImagen + 1) % totalImagenes; // Usa el total de imágenes
-            mostrarImagen(indiceImagen);
-        }
-        // Cambiar la imagen cada 5 segundos (5000 milisegundos)
-        setInterval(siguienteImagen, 5000);
-        // Mostrar la primera imagen al cargar la página
-        mostrarImagen(0);
-
-    </script>
-</body>
-</html>
+        const totalImagenes = document.querySelectorAll('.c
