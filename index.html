@@ -3,23 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>totCOS - Servicios y Productos</title>
+    <title>totCOS - Tu Centro de Estética</title>
     <style>
-        /* --- Estilos Generales (Reutiliza los estilos de index.html) --- */
+        /* --- Estilos Generales --- */
         body {
             font-family: sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f8f5f0; /* Beige claro */
-            color: #4a3a2a; /* Marrón oscuro */
+            background-color: #f8f5f0;
+            color: #4a3a2a;
         }
 
         h1, h2, h3 {
             font-family: "Segoe Script", cursive;
-            color: #c79227; /* Dorado */
+            color: #c79227;
             text-align: center;
         }
-         h1{
+        h1{
             font-size: 3rem;
         }
         h2{
@@ -27,29 +27,28 @@
         }
 
         /* --- Contenedor Principal --- */
-        .contenedor {
+         .contenedor {
             max-width: 960px;
             margin: 0 auto;
             padding: 20px;
         }
 
-          /* --- Encabezado (Header) --- */
+        /* --- Encabezado (Header) --- */
         header {
             background-color: #f8f5f0;
-            padding: 25px; /* Más espacio alrededor del encabezado */
+            padding: 25px;
             text-align: center;
-            border-bottom: 3px solid #e78f28; /* Línea naranja debajo del encabezado */
-
-         }
+            border-bottom: 3px solid #e78f28;
+        }
 
         /* Logo como texto */
         #logo-texto {
             font-family: "Segoe Script", cursive;
-            font-size: 4rem; /* Tamaño grande para el logo */
-            color: #e78f28; /* Naranja principal */
+            font-size: 4rem;
+            color: #e78f28;
             margin-bottom: 10px;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Sombra sutil */
-            display: block; /* Asegura que ocupe todo el ancho */
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+            display: block;
             text-align: center;
         }
         #logo-texto:hover{
@@ -58,12 +57,11 @@
 
         header p {
             font-size: 1.1em;
-            color: #777; /* Gris más suave para el subtítulo */
+            color: #777;
             margin-bottom: 20px;
-
         }
 
-        /* --- Barra de Navegación (Nav) --- */
+        /* --- Barra de Navegación --- */
         nav ul {
             list-style: none;
             padding: 0;
@@ -90,151 +88,192 @@
             color: #fff;
         }
 
-        /* --- Sección de Artículos --- */
-        .articulos {
+        /* --- Sección Principal (Hero) --- */
+         .hero {
+             background-image: url('https://lh3.googleusercontent.com/p/AF1QipPpbrsr8fMwONsDRE7eIeRv7GUrB9NsDDH3tgoW=s680-w680-h510');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        .hero h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #fff;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        .hero p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            color: #f8f5f0;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+        }
+
+        .boton-hero {
+            display: inline-block;
+            background-color: #e78f28;
+            color: white;
+            padding: 15px 25px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .boton-hero:hover {
+            background-color: #c77a27;
+        }
+
+        /* --- Sección de Servicios --- */
+        .servicios {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 20px;
             padding: 40px 0;
+        }
+
+        .servicio {
+            flex: 0 1 calc(33% - 20px);
+            max-width: 300px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .servicio:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .servicio img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 3px solid #e78f28;
+        }
+
+        .servicio-info {
+            padding: 20px;
             text-align: center;
         }
 
-        .articulos h2 {
-            margin-bottom: 30px;
-             color: #c79227;
-        }
-
-        .articulo {
-            margin-bottom: 40px;
-            /* Estilos adicionales para cada artículo */
-            border-bottom: 1px solid #ddd;
-            padding-bottom: 20px;
-        }
-
-        .articulo h3 {
-             color: #c79227;
+        .servicio h3 {
             margin-bottom: 10px;
+            font-size: 1.4em;
         }
 
-        .articulo p {
+        .servicio p {
+            color: #666;
             font-size: 1em;
-            line-height: 1.5;
-            color: #555;
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: left;
+            line-height: 1.4;
         }
 
-        /* --- Sección de Productos --- */
-        .productos {
-            padding: 40px 0;
+        /* --- Sección "Sobre Nosotros" --- */
+        .sobre-nosotros {
+            padding: 60px 20px;
             text-align: center;
             background-color: #f8f5f0;
         }
 
-        .productos h2 {
+        .sobre-nosotros h2 {
             margin-bottom: 30px;
-            color: #c79227;
         }
 
-        .productos-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Diseño adaptable */
-            gap: 20px;
-            justify-content: center; /* Centra los elementos */
-            max-width: 1200px; /* Ancho máximo */
-            margin: 0 auto; /* Centra el grid */
-
-        }
-
-        .producto {
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            padding: 15px;
-            text-align: center;
-            transition: transform 0.2s ease; /* Transición suave */
-        }
-        .producto:hover{
-            transform: translateY(-5px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-
-        }
-
-        .producto img {
-            width: 100%;
-            max-height: 200px; /* Altura máxima para las imágenes */
-            object-fit: contain; /* Ajusta la imagen sin deformarla */
-            border-bottom: 2px solid #eee;
-            margin-bottom: 10px;
-             border-radius: 8px;
-        }
-
-        .producto h3 {
-            font-size: 1.2em;
-            margin-bottom: 5px;
-             color: #c79227;
-
-        }
-
-        .producto p {
-            font-size: 1em;
-            color: #777;
-            margin-bottom: 10px;
-        }
-
-        .producto .precio {
-            font-weight: bold;
-            color: #e78f28; /* Naranja para el precio */
+        .sobre-nosotros p {
             font-size: 1.1em;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            color: #555;
         }
-         /* --- Pie de Página (Footer) --- */
-          footer {
+
+        /* --- Sección de Contacto --- */
+        .contacto {
+            background-color: #e78f28;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        .contacto h2{
+          color:#f8f5f0;
+        }
+
+        .contacto p {
+            margin-bottom: 20px;
+            color:#f8f5f0;
+
+        }
+
+        .info-contacto p {
+            margin: 10px 0;
+            color:#f8f5f0;
+
+        }
+
+        .info-contacto i{
+            margin: 10px;
+            color:#f8f5f0;
+
+        }
+
+        /* --- Pie de Página y Síguenos en Instagram --- */
+        footer {
             background-color: #2d2d2d;
             color: #fff;
             text-align: center;
             padding: 20px 0;
-          }
+        }
 
-          footer p {
-              margin: 5px 0;
-              font-size: 0.9em;
-          }
+        footer p {
+            margin: 5px 0;
+            font-size: 0.9em;
+        }
 
-          footer a {
-                color: #e78f28;
-                text-decoration: none;
-          }
+        footer a {
+            color: #e78f28;
+            text-decoration: none;
+        }
+        footer a:hover{
+            text-decoration: underline;
+        }
 
-          footer a:hover {
-                  text-decoration: underline;
-           }
-            .siguenos-instagram {
+        .siguenos-instagram {
             text-align: center;
             margin: 20px 0;
-              }
+        }
 
-            .siguenos-instagram a {
-                color: #e78f28;
-                text-decoration: none;
-                font-size: 1.5em; /* Tamaño más grande */
-                font-weight: bold;
-                display: inline-block; /* Para aplicar margen */
-                padding: 10px 20px;
-                border-radius: 5px;
-                transition: background-color 0.3s, color 0.3s;
+        .siguenos-instagram a {
+            color: #e78f28;
+            text-decoration: none;
+            font-size: 1.5em; /* Tamaño más grande */
+            font-weight: bold;
+            display: inline-block; /* Para aplicar margen */
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
 
-            }
+        }
 
-            .siguenos-instagram a:hover {
-                background-color: #e78f28;
-                color: #fff;
-                text-decoration: none; /* Quita el subrayado en hover */
+        .siguenos-instagram a:hover {
+            background-color: #e78f28;
+            color: #fff;
+             text-decoration: none; /* Quita el subrayado en hover */
 
-            }
+        }
 
-            .siguenos-instagram i {
-                margin-right: 8px; /* Espacio entre el icono y el texto */
-                font-size: 2em; /* Icono más grande */
+        .siguenos-instagram i {
+            margin-right: 8px; /* Espacio entre el icono y el texto */
+            font-size: 2em; /* Icono más grande */
 
-             }
+        }
 
                /*Boton cambio idioma*/
 
@@ -263,88 +302,157 @@
         }
 
         /* --- Media Queries --- */
-        /* Tablets */
+                /* Tablets */
         @media (max-width: 768px) {
-            .language-switcher {
+            .servicios {
+                flex-direction: column;
+                align-items: center;
+            }
+            .servicio {
+              flex: 0 1 80%;
+              max-width: 80%;
+            }
+             .language-switcher {
                 position: static; /* En pantallas pequeñas, los botones se mostrarán en el flujo normal */
                 margin-bottom: 10px;
                 text-align: center;
             }
-            .productos-grid{
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            }
         }
-        /* Movil */
+
+        /* Móviles */
         @media (max-width: 480px) {
+            nav ul li {
+                display: block;
+                margin: 10px 0;
+            }
+            .hero{
+              padding: 40px 10px;
+            }
+
+            .hero h2{
+              font-size: 1.8em;
+            }
+            .hero p{
+              font-size: 1em;
+            }
+            .servicio {
+                flex: 0 1 100%;
+                max-width: 95%;
+            }
             #logo-texto{
                 font-size: 3rem;
             }
         }
-
     </style>
+
      <!--Iconos Font Awesome-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
 </head>
 <body>
     <div class="language-switcher">
         <button onclick="changeLanguage('es')">ES</button>
         <button onclick="changeLanguage('ca')">CA</button>
     </div>
+
     <div class="contenedor">
         <header>
-             <a id="logo-texto" href="/">totCOS</a>
+            <a id="logo-texto" href="#">totCOS</a>
             <p class="idioma" data-es="Centro de Estética y Bienestar" data-ca="Centre d'Estètica i Benestar">Centro de Estética y Bienestar</p>
             <nav>
                 <ul>
-                    <!-- Enlace a la página principal -->
-                    <li><a href="index.html" class="idioma" data-es="Inicio" data-ca="Inici">Inicio</a></li>
-                    <!--  Enlace a la misma página, ya que estamos en servicios -->
-                    <li><a href="#servicios" class="idioma" data-es="Servicios" data-ca="Serveis">Servicios</a></li>
-                    <li><a href="index.html#sobre-nosotros" class="idioma" data-es="Sobre Nosotros" data-ca="Sobre Nosaltres">Sobre Nosotros</a></li> <!-- Vuelve a index.html -->
-                    <li><a href="index.html#contacto" class="idioma" data-es="Contacto" data-ca="Contacte">Contacto</a></li> <!-- Vuelve a index.html -->
+                    <li><a href="#inicio" class="idioma" data-es="Inicio" data-ca="Inici">Inicio</a></li>
+                    <li><a href="servicios.html" class="idioma" data-es="Servicios" data-ca="Serveis">Servicios</a></li>
+                    <li><a href="#sobre-nosotros" class="idioma" data-es="Sobre Nosotros" data-ca="Sobre Nosaltres">Sobre Nosotros</a></li>
+                    <li><a href="#contacto" class="idioma" data-es="Contacto" data-ca="Contacte">Contacto</a></li>
                 </ul>
             </nav>
         </header>
 
-        <section id="servicios" class="articulos">
-            <h2>Servicios</h2>
-            <div class="articulo">
-                <h3 class="idioma" data-es="Título del Servicio 1" data-ca="Títol del Servei 1">Título del Servicio 1</h3>
-                <p class="idioma" data-es="Aquí va la descripción del servicio 1.  Puedes añadir detalles sobre el tratamiento, sus beneficios, etc." data-ca="Aquí va la descripció del servei 1. Pots afegir detalls sobre el tractament, els seus beneficis, etc.">Aquí va la descripción del servicio 1.  Puedes añadir detalles sobre el tratamiento, sus beneficios, etc.</p>
-                <!-- Añade más detalles del servicio si quieres (por ejemplo, duración, precio) -->
-            </div>
-
-             <div class="articulo">
-                <h3 class="idioma" data-es="Título del Servicio 2" data-ca="Títol del Servei 2">Título del Servicio 2</h3>
-                <p class="idioma" data-es="Aquí va la descripción del servicio 2." data-ca="Aquí va la descripció del servei 2.">Aquí va la descripción del servicio 2.</p>
-
-            </div>
-
-            <!-- Añade más artículos según sea necesario -->
+        <section id="inicio" class="hero">
+            <h2 class="idioma" data-es="Descubre la Belleza en Armonía" data-ca="Descobreix la Bellesa en Harmonia">Descubre la Belleza en Armonía</h2>
+            <p class="idioma" data-es="Sumérgete en un oasis de tranquilidad y renueva tu belleza interior y exterior en el corazón de Barcelona." data-ca="Submergeix-te en un oasi de tranquil·litat i renova la teva bellesa interior i exterior al cor de Barcelona.">Sumérgete en un oasis de tranquilidad y renueva tu belleza interior y exterior en el corazón de Barcelona.</p>
+            <a href="#contacto" class="boton-hero idioma" data-es="Reserva tu Cita" data-ca="Reserva la teva Cita">Reserva tu Cita</a>
         </section>
 
-        <section class="productos">
-            <h2 class="idioma" data-es="Nuestros Productos" data-ca="Els Nostres Productes">Nuestros Productos</h2>
-            <div class="productos-grid">
-                <!-- Producto 1 -->
-                <div class="producto">
-                    <img src="https://cdn.shopify.com/s/files/1/0553/9715/4978/products/cremafacialhidratantepielmixtagrasa_480x480.jpg?v=1680267363" alt="Crema Facial Hidratante Piel Mixta Grasa">
-                    <h3 class="idioma" data-es="Crema Facial Hidratante" data-ca="Crema Facial Hidratant">Crema Facial Hidratante</h3>
-                    <p class="idioma" data-es="Piel Mixta Grasa" data-ca="Pell Mixta Grassa">Piel Mixta Grasa</p>
-                    <p class="precio">34,00€</p>
+        <section id="servicios" class="servicios">
+            <!-- Masaje -->
+            <div class="servicio">
+                <img src="https://images.pexels.com/photos/3997991/pexels-photo-3997991.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Masaje Relajante">
+                <div class="servicio-info">
+                    <h3 class="idioma" data-es="Masaje Relajante" data-ca="Massatge Relaxant">Masaje Relajante</h3>
+                    <p class="idioma" data-es="Libera tensiones y reduce el estrés con nuestro masaje." data-ca="Allibera tensions i redueix l'estrès amb el nostre massatge.">Libera tensiones y reduce el estrés con nuestro masaje.</p>
                 </div>
+            </div>
 
-                <!-- Producto 2 -->
-                <div class="producto">
-                    <img src="https://cdn.shopify.com/s/files/1/0553/9715/4978/products/aguamicelarpielsensible_480x480.jpg?v=1680267298" alt="Agua Micelar Piel Sensible">
-                     <h3 class="idioma" data-es="Agua Micelar" data-ca="Aigua Micel·lar">Agua Micelar</h3>
-                    <p class="idioma" data-es="Piel Sensible" data-ca="Pell Sensible">Piel Sensible</p>
-                    <p class="precio">19,00€</p>
+            <!-- Ayurveda -->
+            <div class="servicio">
+                <img src="https://images.pexels.com/photos/9549311/pexels-photo-9549311.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Tratamiento Ayurveda">
+                <div class="servicio-info">
+                    <h3 class="idioma" data-es="Tratamiento Ayurveda" data-ca="Tractament Ayurveda">Tratamiento Ayurveda</h3>
+                    <p class="idioma" data-es="Equilibrio y armonía con tratamientos Ayurveda personalizados." data-ca="Equilibri i harmonia amb tractaments Ayurveda personalitzats.">Equilibrio y armonía con tratamientos Ayurveda personalizados.</p>
                 </div>
+            </div>
 
-                <!-- Producto 3 -->
-                <div class="producto">
-                    <img src="https://cdn.shopify.com/s/files/1/0553/9715/4978/products/serumacidohialuronico_480x480.jpg?v=1680267811" alt="Serum Ácido Hialurónico">
-                    <h3 class="idioma" data-es="Serum Ácido Hialurónico" data-ca="Sèrum Àcid Hialurònic">Serum Ácido Hialurónico</h3>
-                    <p class="idioma" data-es="Todo tipo de piel" data-ca="Tot tipus de pell">Todo tipo de piel</p>
-                    <p class
+            <!-- Manicura/Pedicura -->
+            <div class="servicio">
+                <img src="https://images.pexels.com/photos/13479685/pexels-photo-13479685.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Manicura y Pedicura">
+                <div class="servicio-info">
+                    <h3 class="idioma" data-es="Manicura y Pedicura Spa" data-ca="Manicura i Pedicura Spa">Manicura y Pedicura Spa</h3>
+                    <p class="idioma" data-es="Embellece tus manos y pies con nuestros servicios." data-ca="Embelleix les teves mans i peus amb els nostres serveis.">Embellece tus manos y pies con nuestros servicios.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="sobre-nosotros" class="sobre-nosotros">
+            <h2 class="idioma" data-es="Nuestra Filosofía" data-ca="La Nostra Filosofia">Nuestra Filosofía</h2>
+            <p class="idioma" data-es="En totCOS, un rincón de paz en Barcelona, cada cliente es único. Meritxell, con más de 25 años de experiencia, te guiará en un viaje de bienestar.  Nuestro objetivo es que encuentres serenidad y renovación. Utilizamos productos de alta calidad y técnicas avanzadas." data-ca="A totCOS, un racó de pau a Barcelona, cada client és únic. La Meritxell, amb més de 25 anys d'experiència, et guiarà en un viatge de benestar. El nostre objectiu és que trobis serenitat i renovació. Utilitzem productes d'alta qualitat i tècniques avançades.">En totCOS, un rincón de paz en Barcelona, cada cliente es único. Meritxell, con más de 25 años de experiencia, te guiará en un viaje de bienestar.  Nuestro objetivo es que encuentres serenidad y renovación. Utilizamos productos de alta calidad y técnicas avanzadas.</p>
+        </section>
+
+        <section id="contacto" class="contacto">
+            <h2 class="idioma" data-es="Contáctanos" data-ca="Contacta'ns">Contáctanos</h2>
+            <div class="info-contacto">
+                <p><i class="fas fa-map-marker-alt"></i> Passeig Maragall 265, Barcelona</p>
+                <p><i class="fas fa-phone"></i> 935 049 194</p>
+                <p><i class="fas fa-envelope"></i> totcoscentre@gmail.com</p>
+                <p><i class="fas fa-clock"></i><span class="idioma" data-es="Horario con cita previa" data-ca="Horari amb cita prèvia">Horario con cita previa</span></p>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+      <p>© 2024 totCOS - Todos los derechos reservados</p>
+      <!--  Síguenos en Instagram  -->
+        <div class="siguenos-instagram">
+            <a href="https://www.instagram.com/totcoscentre/" target="_blank" rel="noopener noreferrer">
+              <i class="fab fa-instagram"></i>
+                <span class="idioma" data-es="Síguenos en Instagram" data-ca="Segueix-nos a Instagram">Síguenos en Instagram</span>
+            </a>
+        </div>
+      <p>Diseñado por ... (opcional)</p>
+    </footer>
+
+     <script>
+        function changeLanguage(lang) {
+            const elements = document.querySelectorAll('.idioma');
+            elements.forEach(el => {
+                const text = el.dataset[lang];
+                if (text) {
+                    el.textContent = text;
+                }
+            });
+            document.documentElement.lang = lang;
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+           changeLanguage('es');
+        });
+
+        // Obtener la URL base
+        const baseUrl = window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/')) + '/';
+
+        // Establecer el href del logo
+        document.getElementById('logo-texto').href = baseUrl;
+
+    </script>
+</body>
+</html>
