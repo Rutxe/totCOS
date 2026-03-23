@@ -2,176 +2,72 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Analizador Táctico de Combate - Élite</title>
+    <title>Analizador Maestro - Reglas de Caballería</title>
     <style>
-        :root { 
-            --gold: #f1c40f; 
-            --red: #e74c3c; 
-            --green: #2ecc71; 
-            --bg: #121212; 
-            --card: #1e1e1e; 
-        }
-        
-        body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            background-color: var(--bg); 
-            color: #e0e0e0; 
-            margin: 0; 
-            padding: 20px; 
-        }
+        :root { --gold: #f1c40f; --red: #e74c3c; --green: #2ecc71; --blue: #3498db; --bg: #121212; --card: #1e1e1e; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg); color: #e0e0e0; margin: 0; padding: 20px; }
+        .container { max-width: 1100px; margin: auto; background: var(--card); padding: 25px; border-radius: 12px; border: 1px solid #333; }
+        h1 { text-align: center; color: var(--gold); text-transform: uppercase; }
 
-        .container { 
-            max-width: 1100px; 
-            margin: auto; 
-            background: var(--card); 
-            padding: 25px; 
-            border-radius: 12px; 
-            border: 1px solid #333; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
+        .rondas-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 20px; }
+        .ronda-card { background: #252525; border: 2px solid #444; border-radius: 8px; padding: 10px; text-align: center; }
+        .ronda-title { font-weight: bold; color: var(--gold); margin-bottom: 10px; font-size: 0.9em; }
 
-        h1 { text-align: center; color: var(--gold); text-transform: uppercase; letter-spacing: 2px; }
+        /* Mapas Visuales */
+        .armor-map { position: relative; width: 100px; height: 120px; margin: 0 auto 10px; background: #333; border-radius: 5px; }
+        .dot { position: absolute; width: 20px; height: 20px; background: #444; border-radius: 50%; border: 1px solid #111; cursor: pointer; font-size: 10px; line-height: 20px; font-weight: bold; }
+        .dot.active { background: var(--red); box-shadow: 0 0 8px var(--red); color: white; }
+        
+        /* Posiciones exactas según imagen */
+        .p1 { top: 25px; right: 5px; }  .p2 { top: 2px; left: 40px; }  .p3 { top: 25px; left: 5px; }
+        .p4 { top: 55px; right: 2px; }  .p5 { top: 55px; left: 40px; }  .p6 { top: 55px; left: 2px; }
+        .p7 { top: 85px; right: 10px; } .p8 { top: 85px; left: 40px; } .p9 { top: 85px; left: 10px; }
 
-        /* Cuadrícula de Rondas */
-        .rondas-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); 
-            gap: 15px; 
-            margin-bottom: 25px; 
-        }
-        
-        .ronda-card { 
-            background: #252525; 
-            border: 2px solid #444; 
-            border-radius: 10px; 
-            padding: 15px; 
-            text-align: center; 
-            transition: 0.3s;
-        }
-        
-        .ronda-card:hover { border-color: var(--gold); }
-        .ronda-title { font-weight: bold; margin-bottom: 15px; color: var(--gold); font-size: 1.1em; }
+        .shield-map { display: flex; justify-content: center; gap: 4px; }
+        .shield { width: 22px; height: 26px; background: #444; clip-path: polygon(0% 0%, 100% 0%, 100% 70%, 50% 100%, 0% 70%); cursor: pointer; font-size: 9px; display: flex; align-items: center; justify-content: center; }
+        .shield.active { background: var(--blue); color: white; }
 
-        /* Mapa de Armadura (Ataque) */
-        .armor-map { 
-            position: relative; 
-            width: 120px; 
-            height: 140px; 
-            margin: 0 auto 15px; 
-            background: #333; 
-            border-radius: 8px; 
-        }
+        textarea { width: 100%; height: 150px; background: #000; color: #2ecc71; border: 1px solid #444; padding: 15px; border-radius: 8px; font-family: monospace; margin-top: 10px; box-sizing: border-box; }
+        button { width: 100%; padding: 15px; background: var(--gold); border: none; font-weight: bold; cursor: pointer; border-radius: 8px; margin-top: 10px; font-size: 1.1em; }
         
-        .dot { 
-            position: absolute; 
-            width: 24px; 
-            height: 24px; 
-            background: #444; 
-            border-radius: 50%; 
-            border: 2px solid #111; 
-            cursor: pointer; 
-            font-size: 11px; 
-            line-height: 24px; 
-            font-weight: bold;
-        }
-        
-        .dot.active { background: var(--gold); color: black; box-shadow: 0 0 10px var(--gold); }
-        
-        /* Posiciones del cuerpo */
-        .p1 { top: 30px; right: 10px; } .p2 { top: 5px; left: 48px; } .p3 { top: 30px; left: 10px; }
-        .p4 { top: 60px; right: 5px; }  .p5 { top: 60px; left: 48px; } .p6 { top: 60px; left: 5px; }
-        .p7 { top: 95px; right: 15px; } .p8 { top: 95px; left: 48px; } .p9 { top: 95px; left: 15px; }
-
-        /* Escudos (Defensa) */
-        .shield-map { display: flex; justify-content: center; gap: 6px; }
-        .shield { 
-            width: 28px; 
-            height: 32px; 
-            background: #444; 
-            clip-path: polygon(0% 0%, 100% 0%, 100% 70%, 50% 100%, 0% 70%); 
-            cursor: pointer; 
-            font-size: 10px; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            font-weight: bold;
-        }
-        .shield.active { background: #3498db; color: white; box-shadow: 0 0 10px #3498db; }
-
-        /* Inputs y Botón */
-        textarea { 
-            width: 100%; 
-            height: 150px; 
-            background: #000; 
-            color: #2ecc71; 
-            border: 1px solid #444; 
-            padding: 15px; 
-            border-radius: 8px; 
-            font-family: 'Courier New', monospace; 
-            box-sizing: border-box;
-            margin-top: 15px;
-        }
-        
-        button { 
-            width: 100%; 
-            padding: 18px; 
-            background: var(--gold); 
-            border: none; 
-            font-weight: bold; 
-            cursor: pointer; 
-            border-radius: 8px; 
-            margin-top: 15px; 
-            font-size: 1.2em; 
-            transition: 0.2s;
-        }
-        
-        button:hover { background: #d4ac0d; transform: scale(1.01); }
-
-        /* Tabla de Resultados */
-        table { width: 100%; border-collapse: collapse; margin-top: 30px; background: #1a1a1a; }
-        th, td { border: 1px solid #333; padding: 15px; text-align: center; }
-        th { background: #2c3e50; color: var(--gold); text-transform: uppercase; font-size: 0.9em; }
-
-        /* Badges de estado */
-        .badge { 
-            padding: 5px 10px; 
-            border-radius: 4px; 
-            font-weight: bold; 
-            display: inline-block;
-            font-size: 0.85em;
-        }
-        .b-block { background: rgba(46, 204, 113, 0.2); color: var(--green); border: 1px solid var(--green); }
-        .b-hit { background: rgba(231, 76, 60, 0.2); color: #ff7675; border: 1px solid var(--red); }
-        .b-neutral { background: #333; color: #aaa; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #333; padding: 10px; text-align: center; font-size: 0.9em; }
+        th { background: #2c3e50; color: var(--gold); }
+        .b-block { color: var(--green); font-weight: bold; }
+        .b-hit { color: #ff7675; }
+        .highlight-rival { background: rgba(241, 196, 15, 0.1); border: 1px solid var(--gold); padding: 2px 5px; border-radius: 3px; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>🛡️ Analizador Táctico: Tu vs Rival</h1>
+    <h1>⚔️ Analizador de Patrones de Combate</h1>
+    <p style="text-align: center; font-size: 0.8em;">Configura TUS áreas (Rondas 1-5) y pega el reporte para deducir las del RIVAL</p>
     
     <div class="rondas-grid" id="setupRondas"></div>
 
-    <div style="text-align: center; margin-bottom: 15px;">
-        <input type="text" id="rivalName" placeholder="NOMBRE DEL RIVAL (Ej: Sir Naka)" style="padding: 12px; width: 300px; background: #222; color: white; border: 1px solid var(--gold); border-radius: 5px; text-align: center;">
+    <div style="text-align: center;">
+        <input type="text" id="rivalName" placeholder="Nombre del Rival" style="padding: 10px; background: #222; color: white; border: 1px solid var(--gold); border-radius: 5px;">
     </div>
 
-    <textarea id="reporte" placeholder="Pega aquí el reporte de combate completo..."></textarea>
-    <button onclick="analizar()">⚔️ ANALIZAR ESTRATEGIA RIVAL</button>
+    <textarea id="reporte" placeholder="Pega el reporte aquí..."></textarea>
+    <button onclick="analizar()">CALCULAR ESTRATEGIA RIVAL</button>
 
     <div id="resultados"></div>
 </div>
 
 <script>
-// Configuración inicial de las 5 rondas
 let config = Array(5).fill().map(() => ({ atq: 5, def: 2 }));
 
-// Zonas que cubre cada posición de tu escudo
-const zonasBloqueoEscudo = { 
-    1:[1,4], 2:[2,5], 3:[3,6], 4:[4,7,5,8], 5:[6,9,5,8] 
+// Reglas oficiales de escudos
+const queBloqueaElEscudoRival = {
+    1: [1, 4],
+    2: [2, 5],
+    3: [3, 6],
+    4: [4, 7, 5, 8],
+    5: [6, 9, 5, 8]
 };
 
-// Dibujar la interfaz de rondas
 function draw() {
     const container = document.getElementById('setupRondas');
     container.innerHTML = '';
@@ -182,7 +78,6 @@ function draw() {
                 <div class="armor-map">
                     ${[1,2,3,4,5,6,7,8,9].map(n => `<div class="dot p${n} ${c.atq===n?'active':''}" onclick="setAtq(${i},${n})">${n}</div>`).join('')}
                 </div>
-                <p style="font-size: 10px; margin: 5px 0;">TU ESCUDO:</p>
                 <div class="shield-map">
                     ${[1,2,3,4,5].map(n => `<div class="shield ${c.def===n?'active':''}" onclick="setDef(${i},${n})">${n}</div>`).join('')}
                 </div>
@@ -197,92 +92,70 @@ draw();
 function analizar() {
     const rival = document.getElementById('rivalName').value.trim();
     const texto = document.getElementById('reporte').value;
-    
-    if(!rival) return alert("Por favor, introduce el nombre del rival para filtrar.");
+    if(!rival) return alert("Pon el nombre del rival");
 
-    // Dividir el texto en líneas y limpiar
     const lineas = texto.split('\n').map(l => l.trim()).filter(l => l !== "");
-    
-    let statsRival = [];
-    let statsRutxe = [];
+    let turnosRival = [];
+    let turnosMios = [];
 
-    // Procesar el reporte buscando al rival y a ti
-    for (let i = 0; i < lineas.length; i++) {
-        let l = lineas[i];
-
-        // Analizar ataques del RIVAL hacia TI
+    // 1. Extraer datos
+    lineas.forEach((l, i) => {
         if (l.startsWith(rival)) {
-            let info = { ev: "Golpe", dFis: 0, dEle: 0, crit: l.includes("crítico") };
+            let info = { ev: "Golpe", dmg: 0 };
             if (l.includes("bloqueado")) info.ev = "Bloqueado";
-            
-            // Buscar daño en la línea siguiente
-            let prox = lineas[i+1] || "";
-            let mDmg = prox.match(/(\d+)\s+puntos de daño físico y (\d+)/);
-            if(mDmg) {
-                info.dFis = parseInt(mDmg[1]);
-                info.dEle = parseInt(mDmg[2]);
-            }
-            statsRival.push(info);
-        } 
-        // Analizar TUS ataques hacia el RIVAL
-        else if (l.toLowerCase().includes("peregrino") || l.startsWith("Rutxe")) {
+            let next = lineas[i+1] || "";
+            let m = next.match(/(\d+)\s+puntos de daño físico/);
+            if(m) info.dmg = parseInt(m[1]);
+            turnosRival.push(info);
+        } else if (l.startsWith("Rutxe") || l.startsWith("peregrino")) {
             let bloqueado = l.includes("bloqueado") || (lineas[i+1] && lineas[i+1].includes("bloqueado"));
-            statsRutxe.push({ bloqueado: bloqueado });
+            turnosMios.push({ bloqueado: bloqueado });
         }
-    }
+    });
 
-    // Generar tabla de resultados
-    let html = `<table>
-        <tr>
-            <th>Turno</th>
-            <th>Defensa (Tu Escudo)</th>
-            <th>Ataque (Vs Rival)</th>
-            <th>Análisis de Daño</th>
-        </tr>`;
+    // 2. Calcular promedio para detectar zonas del RIVAL
+    const golpesLimpios = turnosRival.filter(t => t.dmg > 0).map(t => t.dmg);
+    const avgDmg = golpesLimpios.reduce((a,b) => a+b, 0) / golpesLimpios.length;
 
-    const totalTurnos = Math.max(statsRival.length, statsRutxe.length);
+    let html = `<table><tr><th>Rda</th><th>Acción Rival</th><th>Zona Detectada Rival</th><th>Tu Ataque</th><th>Escudo Rival Deducido</th></tr>`;
 
-    for(let i=0; i < totalTurnos; i++) {
+    for(let i=0; i < Math.max(turnosRival.length, turnosMios.length); i++) {
         let rIdx = i % 5;
-        let sRiv = statsRival[i];
-        let sYo = statsRutxe[i];
-        let miDef = config[rIdx].def;
+        let tR = turnosRival[i];
+        let tM = turnosMios[i];
         let miAtq = config[rIdx].atq;
 
-        // Celda Tu Defensa
-        let celdaDef = "-";
-        if(sRiv) {
-            if(sRiv.ev === "Bloqueado") {
-                celdaDef = `<span class="badge b-block">🛡️ BLOQUEASTE (Zona ${zonasBloqueoEscudo[miDef].join('/')})</span>`;
-            } else {
-                celdaDef = `<span class="badge b-hit">💥 RECIBIDO</span>`;
-            }
+        // Lógica de ataque del rival (Deducir su zona según daño)
+        let zonaRival = "-";
+        if(tR && tR.dmg > 0) {
+            let ratio = tR.dmg / avgDmg;
+            if (ratio > 1.20) zonaRival = "1 (Hombro Der)";
+            else if (ratio > 1.05) zonaRival = "2, 4 o 7 (+10%)";
+            else if (ratio < 0.80) zonaRival = "5 (Pecho)";
+            else if (ratio < 0.95) zonaRival = "6 u 8 (-10%)";
+            else zonaRival = "3 o 9 (Estándar)";
         }
 
-        // Celda Tu Ataque
-        let celdaAtq = "-";
-        if(sYo) {
-            if(sYo.bloqueado) {
-                celdaAtq = `<span class="badge b-block">🛡️ RIVAL BLOQUEÓ (Tu zona ${miAtq})</span>`;
-            } else {
-                celdaAtq = `<span class="badge b-hit">⚔️ IMPACTO EN ZONA ${miAtq}</span>`;
+        // Lógica de escudo del rival (Si te bloqueó, ¿qué escudo lleva?)
+        let escudoDeducido = "Ninguno";
+        if(tM && tM.bloqueado) {
+            let posibles = [];
+            for(let esc in queBloqueaElEscudoRival) {
+                if(queBloqueaElEscudoRival[esc].includes(miAtq)) posibles.push(esc);
             }
+            escudoDeducido = `<span class="highlight-rival">Escudo ${posibles.join(' o ')}</span>`;
         }
-
-        // Celda Daño
-        let celdaDmg = sRiv && sRiv.dFis > 0 ? `<span>${sRiv.dFis} Fís / ${sRiv.dEle} Ele</span>` : "-";
 
         html += `<tr>
-            <td>${i+1} <small>(Rda ${rIdx+1})</small></td>
-            <td>${celdaDef}</td>
-            <td>${celdaAtq}</td>
-            <td>${celdaDmg}</td>
+            <td>${i+1}</td>
+            <td class="${tR && tR.ev==='Bloqueado' ? 'b-block':'b-hit'}">${tR ? tR.ev : '-'}</td>
+            <td>${zonaRival}</td>
+            <td>Zona ${miAtq}</td>
+            <td>${escudoDeducido}</td>
         </tr>`;
     }
-
     document.getElementById('resultados').innerHTML = html + "</table>";
 }
 </script>
-
 </body>
 </html>
