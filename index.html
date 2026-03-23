@@ -2,146 +2,162 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculador de Estrategia - Duelos de Caballeros</title>
+    <title>Analizador Táctico de Duelos - Rutxe Edition</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #2c2f33; color: #ffffff; padding: 20px; }
-        .container { max-width: 900px; margin: auto; background: #23272a; padding: 20px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
-        h1 { text-align: center; color: #e67e22; border-bottom: 2px solid #e67e22; padding-bottom: 10px; }
-        textarea { width: 100%; height: 150px; background: #484c52; color: white; border: 1px solid #7289da; border-radius: 5px; padding: 10px; box-sizing: border-box; }
-        button { width: 100%; padding: 15px; margin-top: 10px; cursor: pointer; background: #e67e22; border: none; color: white; font-weight: bold; border-radius: 5px; transition: 0.3s; }
-        button:hover { background: #d35400; }
-        .results { margin-top: 20px; }
-        table { width: 100%; border-collapse: collapse; margin-top: 10px; background: #2f3136; }
-        th, td { border: 1px solid #444; padding: 12px; text-align: center; }
-        th { background: #e67e22; color: white; }
-        .highlight { font-weight: bold; color: #ffcc00; }
-        .block-event { color: #e74c3c; font-weight: bold; }
-        .miss-event { color: #95a5a6; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: #1a1a1a; color: #eee; padding: 20px; }
+        .container { max-width: 1000px; margin: auto; background: #252525; padding: 20px; border-radius: 8px; border: 1px solid #444; }
+        h1 { text-align: center; color: #f39c12; text-transform: uppercase; }
+        
+        .setup-section { display: flex; flex-wrap: wrap; gap: 20px; justify-content: space-around; margin-bottom: 30px; }
+        .armor-card { background: #333; padding: 10px; border-radius: 5px; text-align: center; width: 180px; }
+        .armor-title { font-size: 0.8em; color: #aaa; margin-bottom: 5px; }
+        
+        select { background: #444; color: white; border: 1px solid #666; padding: 5px; width: 100%; margin-top: 5px; }
+        
+        textarea { width: 100%; height: 120px; background: #111; color: #0f0; border: 1px solid #555; padding: 10px; font-family: monospace; margin-top: 10px; }
+        
+        button { width: 100%; padding: 15px; background: #f39c12; border: none; color: black; font-weight: bold; cursor: pointer; margin-top: 10px; border-radius: 4px; }
+        button:hover { background: #e67e22; }
+
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 0.9em; }
+        th, td { border: 1px solid #444; padding: 10px; text-align: center; }
+        th { background: #d35400; }
+        .match { color: #2ecc71; font-weight: bold; }
+        .discard { color: #e74c3c; text-decoration: line-through; opacity: 0.6; }
+        .highlight { color: #f1c40f; font-weight: bold; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>Análisis de Combate de Caballeros</h1>
+    <h1>Calculador de Estrategia Enemiga</h1>
     
-    <p>Pega aquí el reporte de batalla completo:</p>
-    <textarea id="reporte" placeholder="Ejemplo: L_Kartierdarck Golpe crítico. Causa un golpe de 692 puntos..."></textarea>
-    
-    <label for="rivalName">Nombre del Rival:</label>
-    <input type="text" id="rivalName" placeholder="Ej: Rutxe" style="padding: 5px; margin-bottom: 10px;">
-    
-    <button onclick="analizarCombate()">Analizar Patrón del Rival</button>
+    <div class="setup-section">
+        <script>
+            const zonasAtaque = {
+                1: "Hombro Der (+25% Daño)", 2: "Cabeza (+10% Daño)", 3: "Hombro Izq (0%)",
+                4: "Brazo Der (+10% Daño)", 5: "Pecho (+25% Golpe)", 6: "Brazo Izq (+10% Golpe)",
+                7: "Pierna Der (+10% Daño)", 8: "Centro (+10% Golpe)", 9: "Pierna Izq (0%)"
+            };
+            const zonasDefensa = {
+                1: "T. Der (1, 4)", 2: "Centro (2, 5)", 3: "T. Izq (3, 6)", 4: "P. Der (4, 7, 5, 8)", 5: "P. Izq (6, 9, 5, 8)"
+            };
 
-    <div id="resumenBase" class="results"></div>
-    <div id="resultadoTabla" class="results"></div>
+            for(let i=1; i<=5; i++) {
+                document.write(`
+                    <div class="armor-card">
+                        <div class="armor-title">RONDA ${i}</div>
+                        <label>Mi Ataque:</label>
+                        <select id="miAtq${i}">${Object.entries(zonasAtaque).map(([k,v]) => `<option value="${k}">${v}</option>`).join('')}</select>
+                        <label>Mi Escudo:</label>
+                        <select id="miDef${i}">${Object.entries(zonasDefensa).map(([k,v]) => `<option value="${k}">${v}</option>`).join('')}</select>
+                    </div>
+                `);
+            }
+        </script>
+    </div>
+
+    <div style="display: flex; gap: 10px; align-items: center;">
+        <input type="text" id="rivalName" placeholder="Nombre del Rival" style="flex: 1; padding: 10px; background: #333; color: white; border: 1px solid #555;">
+        <span style="color: #aaa;">Tu nombre: <b>Rutxe</b></span>
+    </div>
+
+    <textarea id="reporte" placeholder="Pega el reporte de batalla aquí..."></textarea>
+    <button onclick="analizar()">ANALIZAR TÁCTICA RIVAL</button>
+
+    <div id="resultados"></div>
 </div>
 
 <script>
-function analizarCombate() {
-    const texto = document.getElementById('reporte').value;
+const mapeoEscudos = {
+    1: [1, 4], 2: [2, 5], 3: [3, 6], 4: [4, 7, 5, 8], 5: [6, 9, 5, 8]
+};
+
+function analizar() {
     const rival = document.getElementById('rivalName').value.trim();
-    
-    if (!rival) {
-        alert("Por favor, introduce el nombre del rival para filtrar.");
-        return;
-    }
+    const texto = document.getElementById('reporte').value;
+    if(!rival) return alert("Pon el nombre del rival");
 
-    // Expresiones regulares para capturar daño y eventos
-    const lineas = texto.split('\n');
+    // Extraer golpes del rival
+    const regexDaño = new RegExp(`${rival}.*?(\\d+)\\s+puntos`, 'g');
+    const regexFallo = new RegExp(`${rival}No da en el blanco`, 'g');
+    const regexBloqueo = new RegExp(`${rival}El golpe es bloqueado`, 'g');
+    
+    // Extraer cuando TÚ eres bloqueado por el rival
+    const regexRivalBloquea = new RegExp(`Rutxe.*?El golpe es bloqueado`, 'g');
+
+    let logs = texto.split('\n').filter(l => l.trim() !== "");
     let turnosRival = [];
-    let contadorGolpeGlobal = 1;
-
-    // Procesar el texto plano (el formato del juego suele venir mezclado)
-    // Buscamos patrones: "Nombre Causa un golpe de X", "Nombre No da en el blanco", "Nombre El golpe es bloqueado"
+    let turnosRutxe = [];
     
-    // El reporte del usuario es un bloque de texto, intentaremos segmentarlo por el nombre del rival
-    const segmentos = texto.split(rival);
-    
-    // El primer segmento suele ser el atacante anterior, lo ignoramos
-    // Empezamos desde el 1 porque el split deja basura antes de la primera mención
-    let dataProcesada = [];
-    
-    // Necesitamos saber en qué posición de la ronda (1-5) está cada acción del rival
-    // IMPORTANTE: Asumimos que el rival ataca una vez por ronda de forma fija
-    let golpeActual = 1;
+    // Simplificación de lectura de turnos correlativos
+    let indexRival = 1;
+    let indexRutxe = 1;
 
-    for (let i = 1; i < segmentos.length; i++) {
-        let fragmento = segmentos[i];
-        let info = {
-            rondaPos: ((golpeActual - 1) % 5) + 1,
-            daño: 0,
-            evento: ""
-        };
-
-        if (fragmento.includes("puntos de daño físico")) {
-            const match = fragmento.match(/(\d+)\s+puntos/);
-            if (match) info.daño = parseInt(match[1]);
-            info.evento = "Impacto";
-        } else if (fragmento.includes("No da en el blanco")) {
-            info.evento = "Fallo";
-        } else if (fragmento.includes("El golpe es bloqueado")) {
-            info.evento = "Bloqueado";
+    // Procesamos el reporte línea a línea para mantener el orden
+    logs.forEach(linea => {
+        if(linea.includes(rival)) {
+            let info = { num: ((indexRival-1)%5)+1, evento: "Golpe", daño: 0 };
+            if(linea.includes("No da en el blanco")) info.evento = "Fallo";
+            else if(linea.includes("El golpe es bloqueado")) info.evento = "Bloqueado";
+            else {
+                let m = linea.match(/(\d+)\s+puntos/);
+                if(m) info.daño = parseInt(m[1]);
+            }
+            turnosRival.push(info);
+            indexRival++;
+        } else if(linea.includes("Rutxe")) {
+            let info = { num: ((indexRutxe-1)%5)+1, bloqueado: linea.includes("bloqueado") };
+            turnosRutxe.push(info);
+            indexRutxe++;
         }
-
-        if (info.evento !== "") {
-            dataProcesada.push(info);
-            golpeActual++;
-        }
-    }
-
-    // Calcular daño base promedio para detectar modificadores
-    const golpesConDaño = dataProcesada.filter(d => d.daño > 0);
-    const promedioDaño = golpesConDaño.reduce((a, b) => a + b.daño, 0) / golpesConDaño.length;
-
-    mostrarResultados(dataProcesada, promedioDaño);
-}
-
-function estimarZona(daño, promedio) {
-    if (daño === 0) return "---";
-    const ratio = daño / promedio;
-
-    if (ratio > 1.18) return "Hombro Derecho (+25% Daño)";
-    if (ratio > 1.05) return "Cabeza/Brazo D./Pierna D. (+10% Daño)";
-    if (ratio > 0.95) return "Hombro Izq / Pierna Izq (0%)";
-    if (ratio > 0.80) return "Brazo Izq / Centro (-10% Daño)";
-    return "Pecho (-25% Daño)";
-}
-
-function mostrarResultados(data, promedio) {
-    let html = `<h3>Promedio de daño detectado: ${Math.round(promedio)}</h3>`;
-    html += `<table><tr><th>Golpe</th><th>Acción Rival</th><th>Daño Físico</th><th>Zona Probable de Ataque</th><th>Posible Bloqueo (si tú atacaste)</th></tr>`;
-
-    // Agrupar por la posición 1-5
-    let resumenRondas = {1:[], 2:[], 3:[], 4:[], 5:[]};
-
-    data.forEach(item => {
-        const zona = estimarZona(item.daño, promedio);
-        resumenRondas[item.rondaPos].push(zona !== "---" ? zona : item.evento);
-
-        html += `<tr>
-            <td>${item.rondaPos}</td>
-            <td class="${item.evento === 'Bloqueado' ? 'block-event' : ''}">${item.evento}</td>
-            <td>${item.daño || '-'}</td>
-            <td class="highlight">${zona}</td>
-            <td>${item.evento === 'Bloqueado' ? 'Escudo Activo en Posición ' + item.rondaPos : '-'}</td>
-        </tr>`;
     });
 
-    html += `</table>`;
-    document.getElementById('resultadoTabla').innerHTML = html;
+    const promedio = turnosRival.filter(t => t.daño > 0).reduce((a,b)=>a+b.daño, 0) / turnosRival.filter(t=>t.daño>0).length || 0;
 
-    // Resumen de deducción
-    let deduccion = "<h3>Deducción de Estrategia:</h3><ul>";
+    render(turnosRival, turnosRutxe, promedio, rival);
+}
+
+function render(tr, tt, prom, rival) {
+    let html = `<table><tr><th>Ronda</th><th>Acción de ${rival}</th><th>Análisis de su Ataque</th><th>Análisis de su Escudo</th></tr>`;
+    
     for(let i=1; i<=5; i++) {
-        const opciones = resumenRondas[i].filter(o => o !== "Fallo" && o !== "Bloqueado");
-        const masFrecuente = opciones.length > 0 ? opciones[0] : "Datos insuficientes (Fallo/Bloqueo)";
-        deduccion += `<li><b>Ronda ${i}:</b> El rival tiende a atacar a <span class='highlight'>${masFrecuente}</span></li>`;
+        let tRival = tr.find(t => t.num === i);
+        let tRutxe = tt.find(t => t.num === i);
+        let miEscudo = parseInt(document.getElementById(`miDef${i}`).value);
+        let miAtaque = parseInt(document.getElementById(`miAtq${i}`).value);
+        
+        // Lógica de descarte de ataque rival
+        let zonasPosibles = "Calculando...";
+        if(tRival && tRival.daño > 0) {
+            let ratio = tRival.daño / prom;
+            if(ratio > 1.15) zonasPosibles = "Hombro Der (1)";
+            else if(ratio > 1.05) zonasPosibles = "Cabeza (2) / Brazo D. (4) / Pierna D. (7)";
+            else if(ratio > 0.90) zonasPosibles = "Hombro Izq (3) / Pierna Izq (9)";
+            else if(ratio > 0.75) zonasPosibles = "Brazo Izq (6) / Centro (8)";
+            else zonasPosibles = "Pecho (5)";
+        } else if (tRival && tRival.evento === "Bloqueado") {
+            zonasPosibles = `<span class="match">Atacó a una de tus zonas: ${mapeoEscudos[miEscudo].join(', ')}</span>`;
+        }
+
+        // Lógica de escudo rival
+        let escudoRival = "Desconocido";
+        if(tRutxe && tRutxe.bloqueado) {
+            escudoRival = `<span class="match">Protege zona ${miAtaque}</span>`;
+        } else if(tRutxe) {
+            escudoRival = `<span class="discard">No cubre zona ${miAtaque}</span>`;
+        }
+
+        html += `<tr>
+            <td><b>${i}</b></td>
+            <td>${tRival ? tRival.evento + (tRival.daño ? ` (${tRival.daño})` : '') : '-'}</td>
+            <td>${zonasPosibles}</td>
+            <td>${escudoRival}</td>
+        </tr>`;
     }
-    deduccion += "</ul>";
-    document.getElementById('resumenBase').innerHTML = deduccion;
+    html += "</table>";
+    document.getElementById('resultados').innerHTML = html;
 }
 </script>
-
 </body>
 </html>
