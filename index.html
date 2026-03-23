@@ -2,71 +2,43 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Analizador Maestro - Reglas de Caballería</title>
+    <title>Calculador de Estrategia Exacta - Caballería</title>
     <style>
-        :root { --gold: #f1c40f; --red: #e74c3c; --green: #2ecc71; --blue: #3498db; --bg: #121212; --card: #1e1e1e; }
-        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg); color: #e0e0e0; margin: 0; padding: 20px; }
-        .container { max-width: 1100px; margin: auto; background: var(--card); padding: 25px; border-radius: 12px; border: 1px solid #333; }
-        h1 { text-align: center; color: var(--gold); text-transform: uppercase; }
-
+        :root { --gold: #f1c40f; --red: #e74c3c; --blue: #3498db; --bg: #121212; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg); color: #e0e0e0; padding: 20px; }
+        .container { max-width: 1000px; margin: auto; background: #1e1e1e; padding: 20px; border-radius: 12px; border: 1px solid #333; }
         .rondas-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 20px; }
         .ronda-card { background: #252525; border: 2px solid #444; border-radius: 8px; padding: 10px; text-align: center; }
-        .ronda-title { font-weight: bold; color: var(--gold); margin-bottom: 10px; font-size: 0.9em; }
-
-        /* Mapas Visuales */
-        .armor-map { position: relative; width: 100px; height: 120px; margin: 0 auto 10px; background: #333; border-radius: 5px; }
-        .dot { position: absolute; width: 20px; height: 20px; background: #444; border-radius: 50%; border: 1px solid #111; cursor: pointer; font-size: 10px; line-height: 20px; font-weight: bold; }
-        .dot.active { background: var(--red); box-shadow: 0 0 8px var(--red); color: white; }
+        .armor-map { position: relative; width: 80px; height: 100px; margin: 0 auto; background: #333; border-radius: 5px; }
+        .dot { position: absolute; width: 16px; height: 16px; background: #444; border-radius: 50%; border: 1px solid #000; cursor: pointer; font-size: 9px; line-height: 16px; }
+        .dot.active { background: var(--red); color: white; box-shadow: 0 0 5px var(--red); }
+        /* Posiciones */
+        .p1 { top: 20px; right: 5px; } .p2 { top: 2px; left: 32px; } .p3 { top: 20px; left: 5px; }
+        .p4 { top: 45px; right: 2px; } .p5 { top: 45px; left: 32px; } .p6 { top: 45px; left: 2px; }
+        .p7 { top: 70px; right: 8px; } .p8 { top: 70px; left: 32px; } .p9 { top: 70px; left: 8px; }
         
-        /* Posiciones exactas según imagen */
-        .p1 { top: 25px; right: 5px; }  .p2 { top: 2px; left: 40px; }  .p3 { top: 25px; left: 5px; }
-        .p4 { top: 55px; right: 2px; }  .p5 { top: 55px; left: 40px; }  .p6 { top: 55px; left: 2px; }
-        .p7 { top: 85px; right: 10px; } .p8 { top: 85px; left: 40px; } .p9 { top: 85px; left: 10px; }
-
-        .shield-map { display: flex; justify-content: center; gap: 4px; }
-        .shield { width: 22px; height: 26px; background: #444; clip-path: polygon(0% 0%, 100% 0%, 100% 70%, 50% 100%, 0% 70%); cursor: pointer; font-size: 9px; display: flex; align-items: center; justify-content: center; }
-        .shield.active { background: var(--blue); color: white; }
-
-        textarea { width: 100%; height: 150px; background: #000; color: #2ecc71; border: 1px solid #444; padding: 15px; border-radius: 8px; font-family: monospace; margin-top: 10px; box-sizing: border-box; }
-        button { width: 100%; padding: 15px; background: var(--gold); border: none; font-weight: bold; cursor: pointer; border-radius: 8px; margin-top: 10px; font-size: 1.1em; }
-        
+        textarea { width: 100%; height: 150px; background: #000; color: #0f0; border: 1px solid #444; padding: 10px; margin-top: 10px; font-family: monospace; }
+        button { width: 100%; padding: 15px; background: var(--gold); border: none; font-weight: bold; cursor: pointer; border-radius: 8px; margin-top: 10px; }
         table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        th, td { border: 1px solid #333; padding: 10px; text-align: center; font-size: 0.9em; }
-        th { background: #2c3e50; color: var(--gold); }
-        .b-block { color: var(--green); font-weight: bold; }
-        .b-hit { color: #ff7675; }
-        .highlight-rival { background: rgba(241, 196, 15, 0.1); border: 1px solid var(--gold); padding: 2px 5px; border-radius: 3px; }
+        th, td { border: 1px solid #333; padding: 8px; text-align: center; }
+        .zona-det { color: var(--gold); font-weight: bold; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>⚔️ Analizador de Patrones de Combate</h1>
-    <p style="text-align: center; font-size: 0.8em;">Configura TUS áreas (Rondas 1-5) y pega el reporte para deducir las del RIVAL</p>
-    
+    <h2 style="color:var(--gold); text-align:center;">ANALIZADOR DE MODIFICADORES</h2>
     <div class="rondas-grid" id="setupRondas"></div>
-
-    <div style="text-align: center;">
-        <input type="text" id="rivalName" placeholder="Nombre del Rival" style="padding: 10px; background: #222; color: white; border: 1px solid var(--gold); border-radius: 5px;">
-    </div>
-
+    <input type="text" id="rivalName" placeholder="Nombre del Rival" style="width:100%; padding:10px; box-sizing:border-box; background:#222; color:white; border:1px solid #444;">
     <textarea id="reporte" placeholder="Pega el reporte aquí..."></textarea>
-    <button onclick="analizar()">CALCULAR ESTRATEGIA RIVAL</button>
-
+    <button onclick="analizar()">CALCULAR ZONAS POR DAÑO EXACTO</button>
     <div id="resultados"></div>
 </div>
 
 <script>
-let config = Array(5).fill().map(() => ({ atq: 5, def: 2 }));
-
-// Reglas oficiales de escudos
-const queBloqueaElEscudoRival = {
-    1: [1, 4],
-    2: [2, 5],
-    3: [3, 6],
-    4: [4, 7, 5, 8],
-    5: [6, 9, 5, 8]
-};
+let config = Array(5).fill().map(() => ({ atq: 5 }));
+const mods = { 1: 1.25, 2: 1.10, 3: 1.0, 4: 1.10, 5: 0.75, 6: 0.90, 7: 1.10, 8: 0.90, 9: 1.0 };
+const escudos = { 1:[1,4], 2:[2,5], 3:[3,6], 4:[4,7,5,8], 5:[6,9,5,8] };
 
 function draw() {
     const container = document.getElementById('setupRondas');
@@ -74,87 +46,80 @@ function draw() {
     config.forEach((c, i) => {
         container.innerHTML += `
             <div class="ronda-card">
-                <div class="ronda-title">RONDA ${i+1}</div>
+                <div style="font-size:10px; color:gray;">TU ATAQUE R${i+1}</div>
                 <div class="armor-map">
                     ${[1,2,3,4,5,6,7,8,9].map(n => `<div class="dot p${n} ${c.atq===n?'active':''}" onclick="setAtq(${i},${n})">${n}</div>`).join('')}
-                </div>
-                <div class="shield-map">
-                    ${[1,2,3,4,5].map(n => `<div class="shield ${c.def===n?'active':''}" onclick="setDef(${i},${n})">${n}</div>`).join('')}
                 </div>
             </div>`;
     });
 }
-
 function setAtq(r, z) { config[r].atq = z; draw(); }
-function setDef(r, z) { config[r].def = z; draw(); }
 draw();
 
 function analizar() {
     const rival = document.getElementById('rivalName').value.trim();
     const texto = document.getElementById('reporte').value;
-    if(!rival) return alert("Pon el nombre del rival");
-
     const lineas = texto.split('\n').map(l => l.trim()).filter(l => l !== "");
-    let turnosRival = [];
-    let turnosMios = [];
+    
+    let golpesRival = [];
+    let misBloqueos = [];
 
-    // 1. Extraer datos
+    // Extraer datos del reporte
     lineas.forEach((l, i) => {
         if (l.startsWith(rival)) {
-            let info = { ev: "Golpe", dmg: 0 };
-            if (l.includes("bloqueado")) info.ev = "Bloqueado";
+            let info = { bloqueado: l.includes("bloqueado"), dmg: 0 };
             let next = lineas[i+1] || "";
-            let m = next.match(/(\d+)\s+puntos de daño físico/);
+            let m = next.match(/Causa un golpe de (\d+)/);
             if(m) info.dmg = parseInt(m[1]);
-            turnosRival.push(info);
-        } else if (l.startsWith("Rutxe") || l.startsWith("peregrino")) {
-            let bloqueado = l.includes("bloqueado") || (lineas[i+1] && lineas[i+1].includes("bloqueado"));
-            turnosMios.push({ bloqueado: bloqueado });
+            golpesRival.push(info);
+        } else if (l.toLowerCase().includes("rutxe") || l.toLowerCase().includes("peregrino")) {
+            misBloqueos.push(l.includes("bloqueado") || (lineas[i+1] && lineas[i+1].includes("bloqueado")));
         }
     });
 
-    // 2. Calcular promedio para detectar zonas del RIVAL
-    const golpesLimpios = turnosRival.filter(t => t.dmg > 0).map(t => t.dmg);
-    const avgDmg = golpesLimpios.reduce((a,b) => a+b, 0) / golpesLimpios.length;
+    // --- EL CORAZÓN DEL CÁLCULO ---
+    // Buscamos el daño base (100%) asumiendo que el daño más bajo es el -25% (Pecho)
+    // O el más alto es el +25% (Hombro Der).
+    let dmgs = golpesRival.filter(g => g.dmg > 0).map(g => g.dmg);
+    let minD = Math.min(...dmgs);
+    let maxD = Math.max(...dmgs);
+    
+    // Si el mínimo es Pecho (0.75), el daño base es min / 0.75
+    let baseCalculada = minD / 0.75; 
 
-    let html = `<table><tr><th>Rda</th><th>Acción Rival</th><th>Zona Detectada Rival</th><th>Tu Ataque</th><th>Escudo Rival Deducido</th></tr>`;
+    let res = `<table><tr><th>Golpe</th><th>Daño</th><th>Modif.</th><th>Zona Rival Detectada</th><th>Escudo Rival</th></tr>`;
 
-    for(let i=0; i < Math.max(turnosRival.length, turnosMios.length); i++) {
-        let rIdx = i % 5;
-        let tR = turnosRival[i];
-        let tM = turnosMios[i];
-        let miAtq = config[rIdx].atq;
-
-        // Lógica de ataque del rival (Deducir su zona según daño)
-        let zonaRival = "-";
-        if(tR && tR.dmg > 0) {
-            let ratio = tR.dmg / avgDmg;
-            if (ratio > 1.20) zonaRival = "1 (Hombro Der)";
-            else if (ratio > 1.05) zonaRival = "2, 4 o 7 (+10%)";
-            else if (ratio < 0.80) zonaRival = "5 (Pecho)";
-            else if (ratio < 0.95) zonaRival = "6 u 8 (-10%)";
-            else zonaRival = "3 o 9 (Estándar)";
+    golpesRival.forEach((g, i) => {
+        let zona = "Desconocida";
+        let modDetectado = "-";
+        
+        if (g.bloqueado) {
+            zona = "BLOQUEADO";
+        } else if (g.dmg > 0) {
+            let ratio = g.dmg / baseCalculada;
+            // Comparar ratio con los modificadores oficiales
+            if (ratio > 1.18) { zona = "1 (Hombro Der)"; modDetectado = "+25%"; }
+            else if (ratio > 1.05) { zona = "2, 4 o 7 (Cabeza/Derecha)"; modDetectado = "+10%"; }
+            else if (ratio > 0.95) { zona = "3 o 9 (Izquierda)"; modDetectado = "0%"; }
+            else if (ratio > 0.85) { zona = "6 u 8 (Brazo Izq/Centro)"; modDetectado = "-10%"; }
+            else { zona = "5 (Pecho)"; modDetectado = "-25%"; }
         }
 
-        // Lógica de escudo del rival (Si te bloqueó, ¿qué escudo lleva?)
-        let escudoDeducido = "Ninguno";
-        if(tM && tM.bloqueado) {
+        // ¿Qué escudo tiene el rival? Miramos tu ataque en esa ronda
+        let miAtq = config[i % 5].atq;
+        let escRival = "No bloqueó";
+        if (misBloqueos[i]) {
             let posibles = [];
-            for(let esc in queBloqueaElEscudoRival) {
-                if(queBloqueaElEscudoRival[esc].includes(miAtq)) posibles.push(esc);
+            for (let e in escudos) {
+                if (escudos[e].includes(miAtq)) posibles.push(e);
             }
-            escudoDeducido = `<span class="highlight-rival">Escudo ${posibles.join(' o ')}</span>`;
+            escRival = "Lleva Escudo " + posibles.join(" o ");
         }
 
-        html += `<tr>
-            <td>${i+1}</td>
-            <td class="${tR && tR.ev==='Bloqueado' ? 'b-block':'b-hit'}">${tR ? tR.ev : '-'}</td>
-            <td>${zonaRival}</td>
-            <td>Zona ${miAtq}</td>
-            <td>${escudoDeducido}</td>
-        </tr>`;
-    }
-    document.getElementById('resultados').innerHTML = html + "</table>";
+        res += `<tr><td>${i+1}</td><td>${g.dmg}</td><td>${modDetectado}</td><td class="zona-det">${zona}</td><td>${escRival}</td></tr>`;
+    });
+
+    document.getElementById('resultados').innerHTML = res + "</table>";
 }
 </script>
 </body>
