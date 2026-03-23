@@ -2,151 +2,145 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Panel de Combate - Rutxe Edition</title>
+    <title>Analizador Táctico - Anti-Críticos - Rutxe</title>
     <style>
-        :root { --gold: #f39c12; --red: #e74c3c; --bg: #1a1a1a; --card: #2c2c2c; }
-        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg); color: #eee; margin: 0; padding: 20px; }
-        .container { max-width: 1100px; margin: auto; }
-        h1 { text-align: center; color: var(--gold); }
+        :root { --gold: #f1c40f; --red: #c0392b; --bg: #121212; --card: #1e1e1e; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: var(--bg); color: #e0e0e0; margin: 0; padding: 20px; }
+        .container { max-width: 1000px; margin: auto; background: var(--card); padding: 25px; border-radius: 12px; border: 1px solid #333; }
+        h1 { text-align: center; color: var(--gold); text-shadow: 2px 2px 4px black; }
 
-        .rondas-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 20px; }
-        .ronda-card { background: var(--card); border: 1px solid #444; border-radius: 8px; padding: 10px; text-align: center; }
-        .ronda-title { font-weight: bold; margin-bottom: 10px; color: var(--gold); border-bottom: 1px solid #444; }
+        .rondas-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px; margin-bottom: 25px; }
+        .ronda-card { background: #252525; border: 1px solid #444; border-radius: 10px; padding: 10px; text-align: center; }
+        .ronda-title { font-weight: bold; margin-bottom: 10px; color: var(--gold); }
 
-        /* Estilo Armadura Visual */
-        .armor-map { position: relative; width: 140px; height: 160px; margin: 0 auto 15px; background: #333; border-radius: 10px; border: 1px dashed #555; }
-        .dot { position: absolute; width: 22px; height: 22px; background: #555; border-radius: 50%; border: 2px solid #222; cursor: pointer; transition: 0.2s; font-size: 10px; line-height: 22px; color: white; }
+        .armor-map { position: relative; width: 130px; height: 150px; margin: 0 auto 10px; background: #333; border-radius: 8px; border: 1px solid #555; }
+        .dot { position: absolute; width: 22px; height: 22px; background: #444; border-radius: 50%; border: 2px solid #111; cursor: pointer; transition: 0.2s; font-size: 10px; line-height: 22px; }
         .dot.active { background: var(--red); box-shadow: 0 0 10px var(--red); border-color: white; }
         
-        /* Posiciones aproximadas según tu imagen */
-        .p1 { top: 35px; right: 20px; } .p2 { top: 5px; left: 59px; } .p3 { top: 35px; left: 20px; }
-        .p4 { top: 70px; right: 15px; } .p5 { top: 70px; left: 59px; } .p6 { top: 70px; left: 15px; }
-        .p7 { top: 105px; right: 25px; } .p8 { top: 105px; left: 59px; } .p9 { top: 105px; left: 25px; }
+        .p1 { top: 30px; right: 15px; } .p2 { top: 5px; left: 54px; } .p3 { top: 30px; left: 15px; }
+        .p4 { top: 65px; right: 10px; } .p5 { top: 65px; left: 54px; } .p6 { top: 65px; left: 10px; }
+        .p7 { top: 100px; right: 20px; } .p8 { top: 100px; left: 54px; } .p9 { top: 100px; left: 20px; }
 
-        /* Escudos Visuales */
-        .shield-map { display: flex; justify-content: center; gap: 5px; margin-top: 10px; }
-        .shield { width: 25px; height: 30px; background: #444; clip-path: polygon(0% 0%, 100% 0%, 100% 70%, 50% 100%, 0% 70%); cursor: pointer; font-size: 10px; display: flex; align-items: center; justify-content: center; border: 1px solid #222; }
-        .shield.active { background: var(--red); color: white; font-weight: bold; }
+        .shield-map { display: flex; justify-content: center; gap: 4px; }
+        .shield { width: 24px; height: 28px; background: #444; clip-path: polygon(0% 0%, 100% 0%, 100% 70%, 50% 100%, 0% 70%); cursor: pointer; font-size: 9px; display: flex; align-items: center; justify-content: center; }
+        .shield.active { background: var(--red); color: white; }
 
-        textarea { width: 100%; height: 100px; background: #111; color: #0f0; border: 1px solid #555; padding: 10px; margin: 15px 0; border-radius: 5px; }
-        button#analizar { width: 100%; padding: 15px; background: var(--gold); border: none; font-weight: bold; cursor: pointer; border-radius: 5px; font-size: 1.1em; }
+        textarea { width: 100%; height: 120px; background: #000; color: #0f0; border: 1px solid #444; padding: 10px; border-radius: 5px; font-family: 'Courier New', monospace; }
+        button { width: 100%; padding: 15px; background: var(--gold); border: none; font-weight: bold; cursor: pointer; border-radius: 5px; margin-top: 15px; font-size: 1.1em; color: #000; }
         
-        .res-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        .res-table th, .res-table td { border: 1px solid #444; padding: 12px; text-align: center; }
-        .res-table th { background: #d35400; }
-        .posible { color: #f1c40f; font-weight: bold; }
-        .seguro { color: #2ecc71; font-weight: bold; }
+        table { width: 100%; border-collapse: collapse; margin-top: 25px; }
+        th, td { border: 1px solid #333; padding: 12px; text-align: center; }
+        th { background: #2c3e50; color: var(--gold); }
+        .crit { color: #f39c12; font-weight: bold; font-style: italic; }
+        .highlight { color: #2ecc71; font-weight: bold; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>Análisis Táctico: Rutxe vs Rival</h1>
+    <h1>Análisis Táctico de Élite</h1>
     
-    <div class="rondas-grid" id="setupRondas">
-        </div>
+    <div class="rondas-grid" id="setupRondas"></div>
 
-    <div style="text-align: center; margin-bottom: 10px;">
-        <input type="text" id="rivalName" placeholder="NOMBRE DEL RIVAL" style="padding: 10px; width: 250px; background: #333; color: white; border: 1px solid var(--gold);">
+    <div style="text-align: center;">
+        <input type="text" id="rivalName" placeholder="NOMBRE DEL RIVAL" style="padding: 12px; width: 280px; background: #222; color: white; border: 1px solid var(--gold); border-radius: 5px;">
     </div>
 
-    <textarea id="reporte" placeholder="Pega aquí el reporte de la batalla..."></textarea>
-    <button id="analizar" onclick="analizar()">CALCULAR ESTRATEGIA RIVAL</button>
+    <textarea id="reporte" placeholder="Pega aquí el reporte..."></textarea>
+    <button onclick="analizar()">ANALIZAR PATRONES (INCLUYE CRÍTICOS)</button>
 
     <div id="resultados"></div>
 </div>
 
 <script>
-// Configuración inicial de las 5 rondas
-const setupRondas = document.getElementById('setupRondas');
-let config = Array(5).fill().map(() => ({ atq: 5, def: 2 })); // Por defecto Pecho y Centro
+let config = Array(5).fill().map(() => ({ atq: 5, def: 2 }));
+const bloqueosEscudo = { 1:[1,4], 2:[2,5], 3:[3,6], 4:[4,7,5,8], 5:[6,9,5,8] };
 
-function drawUI() {
-    setupRondas.innerHTML = '';
-    for(let i=0; i<5; i++) {
-        let card = document.createElement('div');
-        card.className = 'ronda-card';
-        card.innerHTML = `
-            <div class="ronda-title">RONDA ${i+1}</div>
-            <div class="armor-map">
-                ${[1,2,3,4,5,6,7,8,9].map(n => `<div class="dot p${n} ${config[i].atq === n ? 'active' : ''}" onclick="setAtq(${i}, ${n})">${n}</div>`).join('')}
-            </div>
-            <span>Escudo:</span>
-            <div class="shield-map">
-                ${[1,2,3,4,5].map(n => `<div class="shield ${config[i].def === n ? 'active' : ''}" onclick="setDef(${i}, ${n})">${n}</div>`).join('')}
-            </div>
-        `;
-        setupRondas.appendChild(card);
-    }
+function draw() {
+    const container = document.getElementById('setupRondas');
+    container.innerHTML = '';
+    config.forEach((c, i) => {
+        container.innerHTML += `
+            <div class="ronda-card">
+                <div class="ronda-title">RONDA ${i+1}</div>
+                <div class="armor-map">
+                    ${[1,2,3,4,5,6,7,8,9].map(n => `<div class="dot p${n} ${c.atq===n?'active':''}" onclick="setAtq(${i},${n})">${n}</div>`).join('')}
+                </div>
+                <div class="shield-map">
+                    ${[1,2,3,4,5].map(n => `<div class="shield ${c.def===n?'active':''}" onclick="setDef(${i},${n})">${n}</div>`).join('')}
+                </div>
+            </div>`;
+    });
 }
 
-function setAtq(ronda, zona) { config[ronda].atq = zona; drawUI(); }
-function setDef(ronda, zona) { config[ronda].def = zona; drawUI(); }
-
-drawUI();
-
-const bloqueosEscudo = { 1:[1,4], 2:[2,5], 3:[3,6], 4:[4,7,5,8], 5:[6,9,5,8] };
+function setAtq(r, z) { config[r].atq = z; draw(); }
+function setDef(r, z) { config[r].def = z; draw(); }
+draw();
 
 function analizar() {
     const rival = document.getElementById('rivalName').value.trim();
     const texto = document.getElementById('reporte').value;
-    if(!rival) return alert("Escribe el nombre del rival");
+    if(!rival) return alert("Indica el nombre del rival");
 
-    const lineas = texto.split(/\r?\n/).filter(l => l.trim() !== "");
+    // Limpieza de datos: quitar saltos de línea molestos y unificar
+    const lineas = texto.replace(/\t/g, ' ').split('\n').map(l => l.trim()).filter(l => l !== "");
+    
     let turnosRival = [];
     let turnosRutxe = [];
-    let cRival = 0, cRutxe = 0;
+    let contadorRival = 0;
+    let contadorRutxe = 0;
 
-    lineas.forEach(linea => {
-        if(linea.includes(rival)) {
-            let info = { ronda: (cRival % 5), ev: "Impacto", daño: 0 };
-            if(linea.includes("No da en el blanco")) info.ev = "Fallo";
-            else if(linea.includes("bloqueado")) info.ev = "Bloqueado";
+    for (let i = 0; i < lineas.length; i++) {
+        let l = lineas[i];
+        
+        if (l.startsWith(rival)) {
+            let info = { ronda: (contadorRival % 5), ev: "Golpe", daño: 0, crit: l.includes("crítico") };
+            // El daño suele estar en la línea siguiente o en la misma
+            let textoBusqueda = l + (lineas[i+1] || "");
+            if (textoBusqueda.includes("No da en el blanco")) info.ev = "Fallo";
+            else if (textoBusqueda.includes("bloqueado")) info.ev = "Bloqueado";
             else {
-                let m = linea.match(/(\d+)\s+puntos/);
-                if(m) info.daño = parseInt(m[1]);
+                let m = textoBusqueda.match(/(\d+)\s+puntos/);
+                if (m) info.daño = parseInt(m[1]);
             }
             turnosRival.push(info);
-            cRival++;
-        } else if(linea.includes("Rutxe")) {
-            turnosRutxe.push({ ronda: (cRutxe % 5), bloqueado: linea.includes("bloqueado") });
-            cRutxe++;
+            contadorRival++;
+        } else if (l.startsWith("Rutxe")) {
+            let bloqueado = l.includes("bloqueado") || (lineas[i+1] && lineas[i+1].includes("bloqueado"));
+            turnosRutxe.push({ ronda: (contadorRutxe % 5), bloqueado: bloqueado });
+            contadorRutxe++;
         }
-    });
+    }
 
-    const prom = turnosRival.filter(t => t.daño > 0).reduce((a,b)=>a+b.daño,0) / turnosRival.filter(t=>t.daño>0).length || 0;
+    const golpesValidos = turnosRival.filter(t => t.daño > 0);
+    const prom = golpesValidos.reduce((a,b) => a + b.daño, 0) / golpesValidos.length || 0;
 
-    let html = `<table class="res-table"><tr><th>Ronda</th><th>Su Ataque</th><th>Su Escudo</th></tr>`;
+    let res = `<table><tr><th>Ronda</th><th>Evento ${rival}</th><th>Análisis de Daño</th><th>Escudo Rival</th></tr>`;
     
     for(let i=0; i<5; i++) {
-        let tRiv = turnosRival.find(t => t.ronda === i);
-        let tRut = turnosRutxe.find(t => t.ronda === i);
+        let tr = turnosRival.find(t => t.ronda === i);
+        let tu = turnosRutxe.find(t => t.ronda === i);
         let miDef = config[i].def;
         let miAtq = config[i].atq;
 
-        // Deducción Ataque Rival
-        let ataqueDeducido = "Analizando...";
-        if(tRiv) {
-            if(tRiv.ev === "Bloqueado") {
-                ataqueDeducido = `<span class="seguro">Zona ${bloqueosEscudo[miDef].join(' o ')}</span>`;
-            } else if(tRiv.daño > 0) {
-                let ratio = tRiv.daño / prom;
-                let zonas = ratio > 1.15 ? "Hombro D. (1)" : (ratio > 1.05 ? "2, 4 o 7" : (ratio > 0.9 ? "3 o 9" : "6, 8 o 5"));
-                ataqueDeducido = `<span class="posible">${zonas}</span> (No bloqueaste zona correcta)`;
-            } else {
-                ataqueDeducido = "Fallo de puntería";
-            }
+        let atqTxt = "Sin datos";
+        if(tr) {
+            if(tr.ev === "Bloqueado") atqTxt = `<span class="highlight">Zona ${bloqueosEscudo[miDef].join(' o ')}</span>`;
+            else if(tr.daño > 0) {
+                let ratio = tr.daño / prom;
+                let zona = "Estándar (0%)";
+                if(ratio > 1.12) zona = "Hombro Der (+25%)";
+                else if(ratio > 1.04) zona = "Cabeza/Brazo D./Pierna D. (+10%)";
+                else if(ratio < 0.85) zona = "Pecho (-25%)";
+                else if(ratio < 0.95) zona = "Brazo I./Centro (-10%)";
+                atqTxt = `${zona} ${tr.crit ? '<span class="crit">[CRIT]</span>' : ''}`;
+            } else atqTxt = tr.ev;
         }
 
-        // Deducción Escudo Rival
-        let escudoDeducido = "Desconocido";
-        if(tRut) {
-            escudoDeducido = tRut.bloqueado ? `<span class="seguro">Cubre zona ${miAtq}</span>` : `<span style="color:#888">No cubre zona ${miAtq}</span>`;
-        }
-
-        html += `<tr><td><b>${i+1}</b></td><td>${ataqueDeducido}</td><td>${escudoDeducido}</td></tr>`;
+        let escTxt = tu ? (tu.bloqueado ? `<span class="highlight">Cubre zona ${miAtq}</span>` : "No cubre") : "-";
+        res += `<tr><td>${i+1}</td><td>${tr ? tr.ev : '-'}</td><td>${atqTxt}</td><td>${escTxt}</td></tr>`;
     }
-    document.getElementById('resultados').innerHTML = html + "</table>";
+    document.getElementById('resultados').innerHTML = res + "</table>";
 }
 </script>
 </body>
