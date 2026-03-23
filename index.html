@@ -3,619 +3,145 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>totCOS - Tu Centro de Estética</title>
+    <title>Calculador de Estrategia - Duelos de Caballeros</title>
     <style>
-        /* --- Estilos Generales --- */
-        body {
-            font-family: sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f8f5f0;
-            color: #4a3a2a;
-        }
-
-        h1, h2, h3 {
-            font-family: "Segoe Script", cursive;
-            color: #c79227;
-            text-align: center;
-        }
-        h1{
-            font-size: 3rem;
-        }
-        h2{
-            font-size: 2rem;
-        }
-
-        /* --- Contenedor Principal --- */
-         .contenedor {
-            max-width: 960px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        /* --- Encabezado (Header) --- */
-        header {
-            background-color: #f8f5f0;
-            padding: 25px;
-            text-align: center;
-            border-bottom: 3px solid #e78f28;
-        }
-
-        /* Logo como texto */
-        #logo-texto {
-            font-family: "Segoe Script", cursive;
-            font-size: 4rem;
-            color: #e78f28;
-            margin-bottom: 10px;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-            display: block;
-            text-align: center;
-        }
-        #logo-texto:hover{
-            color:#c77a27;
-        }
-
-        header p {
-            font-size: 1.1em;
-            color: #777;
-            margin-bottom: 20px;
-        }
-
-        /* --- Barra de Navegación --- */
-        nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 20px 0;
-            text-align: center;
-        }
-
-        nav ul li {
-            display: inline;
-            margin: 0 15px;
-        }
-
-        nav a {
-            text-decoration: none;
-            color: #a85725;
-            font-weight: bold;
-            padding: 8px 12px;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-
-        nav a:hover {
-            background-color: #e6a157;
-            color: #fff;
-        }
-
-       /* --- Sección Hero (Imagen de Cabecera) --- */
-        .hero {
-            background-image: url('https://lh3.googleusercontent.com/p/AF1QipPpbrsr8fMwONsDRE7eIeRv7GUrB9NsDDH3tgoW=s680-w680-h510');
-            background-size: cover;
-            background-position: center;
-            color: white;
-            text-align: center;
-            padding: 150px 20px; /* Aumenté el padding vertical */
-            position: relative;
-            background-attachment: fixed; /*Efecto Parallax*/
-        }
-       .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.4); /* Aumenté la opacidad */
-            z-index: 0; /* Asegura que esté debajo del texto */
-        }
-
-        .hero-overlay {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-          z-index: 1; /* Para que esté por encima de las imágenes */
-
-        }
-        .hero h2, .hero p, .hero .boton-hero {
-            position: relative;
-            z-index: 2; /*Texto encima del overlay*/
-        }
-
-        .hero h2 {
-            font-size: 2.5em;
-            margin-bottom: 20px;
-            color: #fff;
-            font-weight: bold;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-        }
-
-        .hero p {
-            font-size: 1.2em;
-            margin-bottom: 30px;
-            color: #f8f5f0;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
-        }
-
-        .boton-hero {
-            display: inline-block;
-            background-color: #e78f28;
-            color: white;
-            padding: 15px 25px;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: bold;
-            transition: background-color 0.3s ease;
-            border: none;
-            cursor: pointer;
-        }
-
-        .boton-hero:hover {
-            background-color: #c77a27;
-        }
-
-       /* --- Carrusel (Después del Hero) --- */
-        .carrusel-container {
-            width: 100%;
-            max-width: 1200px; /* Limita el ancho máximo del carrusel */
-            margin: 0 auto;    /* Centra el carrusel */
-            overflow: hidden;  /* Oculta lo que sobresalga */
-            padding: 40px 0;   /* Espacio arriba y abajo */
-            position: relative; /* Para los botones de control, si los añades */
-        }
-
-        .carrusel {
-            display: flex;          /* Flexbox para las imágenes */
-            transition: transform 0.8s ease-in-out; /* Transición suave */
-            width: 400%; /* Ancho total (4 imágenes x 100%) */
-             will-change: transform; /* Optimización para la animación */
-
-        }
-
-        .carrusel img {
-            width: 25%;       /* Cada imagen ocupa 1/4 del contenedor */
-            height: auto;     /* Altura automática, manteniendo proporción */
-            object-fit: contain; /* Ajuste "contain" */
-            object-position: center; /* Centra la imagen */
-            flex-shrink: 0;     /* Evita que las imágenes se encojan */
-            display: block;  /* Elimina espacio extra debajo de las imágenes */
-            max-height: 600px;
-
-        }
-
-        /* --- Sección de Servicios --- */
-        .servicios {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-            gap: 20px;
-            padding: 40px 0;
-        }
-
-        .servicio {
-            flex: 0 1 calc(33% - 20px);
-            max-width: 300px;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            transition: transform 0.3s ease;
-        }
-
-        .servicio:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-        }
-
-        .servicio img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-bottom: 3px solid #e78f28;
-        }
-
-        .servicio-info {
-            padding: 20px;
-            text-align: center;
-        }
-
-        .servicio h3 {
-            margin-bottom: 10px;
-            font-size: 1.4em;
-        }
-
-        .servicio p {
-            color: #666;
-            font-size: 1em;
-            line-height: 1.4;
-        }
-
-        /* --- Sección "Sobre Nosotros" --- */
-        .sobre-nosotros {
-            padding: 60px 20px;
-            text-align: center;
-            background-color: #f8f5f0;
-        }
-
-        .sobre-nosotros h2 {
-            margin-bottom: 30px;
-        }
-
-        .sobre-nosotros p {
-            font-size: 1.1em;
-            line-height: 1.6;
-            max-width: 800px;
-            margin: 0 auto;
-            color: #555;
-        }
-
-        /* --- Sección de Contacto --- */
-        .contacto {
-            background-color: #e78f28;
-            padding: 40px 20px;
-            text-align: center;
-        }
-        .contacto h2{
-          color:#f8f5f0;
-        }
-
-        .contacto p {
-            margin-bottom: 20px;
-            color:#f8f5f0;
-
-        }
-
-        .info-contacto p {
-            margin: 10px 0;
-            color:#f8f5f0;
-
-        }
-
-        .info-contacto i{
-            margin: 10px;
-            color:#f8f5f0;
-
-        }
-          /* Google Maps */
-        .mapa-google {
-            margin-top: 30px;
-            text-align: center;
-        }
-         .mapa-google iframe {
-            width: 90%; /* Usa un porcentaje para que sea responsive */
-            max-width: 600px; /* Ancho máximo */
-            height: 400px;
-            border: 3px solid #e78f28; /* Borde naranja */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra */
-            border-radius: 8px; /* Bordes redondeados */
-        }
-
-        /* --- Pie de Página y Síguenos en Instagram --- */
-        footer {
-            background-color: #2d2d2d;
-            color: #fff;
-            text-align: center;
-            padding: 20px 0;
-        }
-
-        footer p {
-            margin: 5px 0;
-            font-size: 0.9em;
-        }
-
-        footer a {
-            color: #e78f28;
-            text-decoration: none;
-        }
-        footer a:hover{
-            text-decoration: underline;
-        }
-          /* --- Sección Síguenos en Instagram (Ahora al principio) --- */
-        .siguenos-instagram {
-            text-align: center;
-            margin: 30px 0; /*  margen arriba y abajo */
-        }
-
-        .siguenos-instagram a {
-            color: #e78f28;
-            text-decoration: none;
-            font-size: 2em; /* Aún más grande */
-            font-weight: bold;
-            display: inline-flex; /* Para centrar verticalmente el icono */
-            align-items: center; /* Centra verticalmente */
-            justify-content: center; /* Centra horizontalmente */
-            padding: 15px 30px; /* Más padding */
-            border-radius: 10px; /* Bordes más redondeados */
-            transition: background-color 0.3s, color 0.3s;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra */
-              margin: 0 10px;
-        }
-
-        .siguenos-instagram a:hover {
-            background-color: #e78f28;
-            color: #fff;
-            text-decoration: none;
-        }
-
-        .siguenos-instagram i {
-            margin-right: 12px; /* Más espacio */
-            font-size: 2.5em; /* Icono más grande */
-        }
-          .redes-sociales {
-            text-align: center; /* Centra los enlaces */
-            margin-top: 20px; /* Espacio por encima */
-             margin-bottom: 30px;
-         }
-          .redes-sociales a {
-            display: inline-block; /* Para que los márgenes funcionen */
-            margin: 0 15px; /* Espacio horizontal entre los iconos */
-            color: #e78f28;
-            font-size: 2.5em; /* Aumenta el tamaño de los iconos */
-         }
-
-        .redes-sociales a:hover {
-            color: #c77a27;
-            text-decoration: none;
-         }
-          .redes-sociales-texto {
-            text-align: center;
-            margin-bottom: 10px; /* Espacio debajo del texto */
-            font-size: 1.1em;
-            color: #555;
-        }
-
-               /*Boton cambio idioma*/
-
-        .language-switcher {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            z-index: 1000; /* Asegura que esté por encima de otros elementos */
-
-        }
-
-        .language-switcher button {
-            background-color: #e78f28;
-            color: white;
-            padding: 8px 12px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-left: 5px; /* Espacio entre botones */
-            font-size: 1rem;
-            font-weight: bold;
-        }
-        .language-switcher button:hover{
-            background-color: #c77a27;
-
-        }
-
-        /* --- Media Queries --- */
-                /* Tablets */
-        @media (max-width: 768px) {
-            .servicios {
-                flex-direction: column;
-                align-items: center;
-            }
-            .servicio {
-              flex: 0 1 80%;
-              max-width: 80%;
-            }
-             .language-switcher {
-                position: static; /* En pantallas pequeñas, los botones se mostrarán en el flujo normal */
-                margin-bottom: 10px;
-                text-align: center;
-            }
-              .siguenos-instagram {
-                margin: 20px 0; /* Ajusta el margen en pantallas pequeñas */
-            }
-              .siguenos-instagram a {
-                font-size: 1.5em; /* Reduce un poco el tamaño en móviles */
-                padding: 10px 20px;
-            }
-              .siguenos-instagram i {
-                font-size: 2em;
-                margin-right: 8px;
-            }
-            .redes-sociales a {
-                font-size: 1.5em; /* Reduce el tamaño en pantallas más pequeñas */
-            }
-             /* Carrusel en pantallas medianas */
-            .carrusel-container {
-                padding: 20px 0; /* Reduce el padding en pantallas más pequeñas */
-            }
-            .carrusel img {
-                object-fit: contain; /* Cambia a "contain" en pantallas medianas */
-                max-height: none;
-            }
-        }
-
-        /* Móviles */
-        @media (max-width: 480px) {
-            nav ul li {
-                display: block;
-                margin: 10px 0;
-            }
-            .hero{
-              padding: 40px 10px;
-            }
-
-            .hero h2{
-              font-size: 1.8em;
-            }
-            .hero p{
-              font-size: 1em;
-            }
-            .servicio {
-                flex: 0 1 100%;
-                max-width: 95%;
-            }
-            #logo-texto{
-                font-size: 3rem;
-            }
-            .mapa-google iframe{
-                height: 300px;
-            }
-             /* Carrusel en móviles */
-            .carrusel-container {
-                padding: 10px 0; /* Aún más reducido en móviles */
-            }
-            .carrusel img {
-                object-fit: contain; /*  "contain" en móviles */
-                 max-height: none;
-            }
-        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #2c2f33; color: #ffffff; padding: 20px; }
+        .container { max-width: 900px; margin: auto; background: #23272a; padding: 20px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+        h1 { text-align: center; color: #e67e22; border-bottom: 2px solid #e67e22; padding-bottom: 10px; }
+        textarea { width: 100%; height: 150px; background: #484c52; color: white; border: 1px solid #7289da; border-radius: 5px; padding: 10px; box-sizing: border-box; }
+        button { width: 100%; padding: 15px; margin-top: 10px; cursor: pointer; background: #e67e22; border: none; color: white; font-weight: bold; border-radius: 5px; transition: 0.3s; }
+        button:hover { background: #d35400; }
+        .results { margin-top: 20px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; background: #2f3136; }
+        th, td { border: 1px solid #444; padding: 12px; text-align: center; }
+        th { background: #e67e22; color: white; }
+        .highlight { font-weight: bold; color: #ffcc00; }
+        .block-event { color: #e74c3c; font-weight: bold; }
+        .miss-event { color: #95a5a6; }
     </style>
-
-     <!--Iconos Font Awesome-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-
 </head>
 <body>
-    <div class="language-switcher">
-        <button onclick="changeLanguage('es')">ES</button>
-        <button onclick="changeLanguage('ca')">CA</button>
-    </div>
 
-    <div class="contenedor">
-        <header>
-            <a id="logo-texto" href="#">totCOS</a> <!--  href="#" temporal -->
-            <p class="idioma" data-es="Centro de Estética y Bienestar" data-ca="Centre d'Estètica i Benestar">Centro de Estética y Bienestar</p>
-            <nav>
-                <ul>
-                    <li><a href="#inicio" class="idioma" data-es="Inicio" data-ca="Inici">Inicio</a></li>
-                    <li><a href="servicios.html" class="idioma" data-es="Servicios" data-ca="Serveis">Servicios</a></li>
-                    <li><a href="#sobre-nosotros" class="idioma" data-es="Sobre Nosotros" data-ca="Sobre Nosaltres">Sobre Nosotros</a></li>
-                    <li><a href="#contacto" class="idioma" data-es="Contacto" data-ca="Contacte">Contacto</a></li>
-                </ul>
-            </nav>
-        </header>
-          <!-- Sección de Redes Sociales (Facebook e Instagram) -->
-         <div class="redes-sociales-texto idioma" data-es="Síguenos en nuestras redes sociales" data-ca="Segueix-nos a les nostres xarxes socials">
-            Síguenos en nuestras redes sociales
-         </div>
-        <div class="redes-sociales">
-            <a href="https://www.facebook.com/people/totcoscentre/100057121553428/" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-square"></i></a>
-            <a href="https://www.instagram.com/totcoscentre/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
-        </div>
+<div class="container">
+    <h1>Análisis de Combate de Caballeros</h1>
+    
+    <p>Pega aquí el reporte de batalla completo:</p>
+    <textarea id="reporte" placeholder="Ejemplo: L_Kartierdarck Golpe crítico. Causa un golpe de 692 puntos..."></textarea>
+    
+    <label for="rivalName">Nombre del Rival:</label>
+    <input type="text" id="rivalName" placeholder="Ej: Rutxe" style="padding: 5px; margin-bottom: 10px;">
+    
+    <button onclick="analizarCombate()">Analizar Patrón del Rival</button>
 
+    <div id="resumenBase" class="results"></div>
+    <div id="resultadoTabla" class="results"></div>
+</div>
 
+<script>
+function analizarCombate() {
+    const texto = document.getElementById('reporte').value;
+    const rival = document.getElementById('rivalName').value.trim();
+    
+    if (!rival) {
+        alert("Por favor, introduce el nombre del rival para filtrar.");
+        return;
+    }
 
-        <section id="inicio" class="hero">
-            <div class="hero-overlay">
-              <h2 class="idioma" data-es="Descubre la Belleza en Armonía" data-ca="Descobreix la Bellesa en Harmonia">Descubre la Belleza en Armonía</h2>
-              <p class="idioma" data-es="Sumérgete en un oasis de tranquilidad y renueva tu belleza interior y exterior en el corazón de Barcelona." data-ca="Submergeix-te en un oasi de tranquil·litat i renova la teva bellesa interior i exterior al cor de Barcelona.">Sumérgete en un oasis de tranquilidad y renueva tu belleza interior y exterior en el corazón de Barcelona.</p>
-              <a href="#contacto" class="boton-hero idioma" data-es="Reserva tu Cita" data-ca="Reserva la teva Cita">Reserva tu Cita</a>
-            </div>
-        </section>
-         <!-- Carrusel (Después del Hero) -->
-        <div class="carrusel-container">
-            <div class="carrusel">
-                <img src="https://lh3.googleusercontent.com/gps-cs-s/AB5caB9OhJvI96SmIiBs3qzmNNzkHDRxuQlCbJQXLop99UNjrk2_M4tekf5AnINYN_BXwF0yRqflm9HQfZoLdWwr8flz-VcFm0xU8yVmjg39w9hyxdEWi_IKI1fn7uQN3I_r5vgi-pLy8Q=s680-w680-h510" alt="Imagen 1">
-                <img src="https://lh3.googleusercontent.com/p/AF1QipNARNbR97JQL6o7J9u3FcI-JZ73U3q4NRdAo7-7=s680-w680-h510" alt="Imagen 2">
-                <img src="https://lh3.googleusercontent.com/p/AF1QipOmoidZ71QPTTHXgJNKnYSFVz5ab18_JIBYgECC=s680-w680-h510" alt="Imagen 3">
-                <img src="https://lh3.googleusercontent.com/p/AF1QipOvsmfKNxTeI1mXSRctXxvO3ucyO4z6HRgayrz4=s680-w680-h510" alt="Imagen 4">
-            </div>
-        </div>
+    // Expresiones regulares para capturar daño y eventos
+    const lineas = texto.split('\n');
+    let turnosRival = [];
+    let contadorGolpeGlobal = 1;
 
-        <section id="servicios" class="servicios">
-            <!-- Masaje -->
-            <div class="servicio">
-                <img src="https://images.pexels.com/photos/3997991/pexels-photo-3997991.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Masaje Relajante">
-                <div class="servicio-info">
-                    <h3 class="idioma" data-es="Masajes" data-ca="Massatges">Masajes</h3>
-                    <p class="idioma" data-es="Libera tensiones y reduce el estrés con nuestro masaje." data-ca="Allibera tensions i redueix l'estrès amb el nostre massatge.">Libera tensiones y reduce el estrés con nuestro masaje.</p>
-                </div>
-            </div>
+    // Procesar el texto plano (el formato del juego suele venir mezclado)
+    // Buscamos patrones: "Nombre Causa un golpe de X", "Nombre No da en el blanco", "Nombre El golpe es bloqueado"
+    
+    // El reporte del usuario es un bloque de texto, intentaremos segmentarlo por el nombre del rival
+    const segmentos = texto.split(rival);
+    
+    // El primer segmento suele ser el atacante anterior, lo ignoramos
+    // Empezamos desde el 1 porque el split deja basura antes de la primera mención
+    let dataProcesada = [];
+    
+    // Necesitamos saber en qué posición de la ronda (1-5) está cada acción del rival
+    // IMPORTANTE: Asumimos que el rival ataca una vez por ronda de forma fija
+    let golpeActual = 1;
 
-            <!-- Ayurveda -->
-            <div class="servicio">
-                <img src="https://i.imgur.com/i0qt012.jpeg" alt="Tratamiento Ayurveda">
-                <div class="servicio-info">
-                    <h3 class="idioma" data-es="Tratamientos Ayurvédicos" data-ca="Tractaments Ayurvèdics">Tratamientos Ayurvédicos</h3>
-                    <p class="idioma" data-es="Equilibrio y armonía con tratamientos Ayurveda personalizados." data-ca="Equilibri i harmonia amb tractaments Ayurveda personalitzats.">Equilibrio y armonía con tratamientos Ayurveda personalizados.</p>
-                </div>
-            </div>
+    for (let i = 1; i < segmentos.length; i++) {
+        let fragmento = segmentos[i];
+        let info = {
+            rondaPos: ((golpeActual - 1) % 5) + 1,
+            daño: 0,
+            evento: ""
+        };
 
-            <!-- Manicura/Pedicura -->
-            <div class="servicio">
-                <img src="https://scontent-mad1-1.xx.fbcdn.net/v/t1.6435-9/95308648_172494974218760_8053221949544857600_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=0b6b33&_nc_ohc=m8m4NyPzlV8Q7kNvgEgTXms&_nc_oc=AdiYPnBY3Cez4QTTlkXeRBa7P5D4muvwtn6Gm7Pyq75YCpRelE7PvNN84rMqmdcpF7k&_nc_zt=23&_nc_ht=scontent-mad1-1.xx&_nc_gid=AH_x-8Qq8wAcuCXxoVSqUzc&oh=00_AYD_AD2w_zNKMPPq1w8VzcPzdfNhmMKn_aKAaO241RUOMw&oe=67D5DCEE" alt="Manicura y Pedicura">
-                <div class="servicio-info">
-                    <h3 class="idioma" data-es="Manicura y Pedicura Spa" data-ca="Manicura i Pedicura Spa">Manicura y Pedicura Spa</h3>
-                    <p class="idioma" data-es="Embellece tus manos y pies con nuestros servicios." data-ca="Embelleix les teves mans i peus amb els nostres serveis.">Embellece tus manos y pies con nuestros servicios.</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="sobre-nosotros" class="sobre-nosotros">
-            <h2 class="idioma" data-es="Nuestra Filosofía" data-ca="La Nostra Filosofia">Nuestra Filosofía</h2>
-            <p class="idioma" data-es="totCOS no es solo un centro de estética, es un refugio de paz en el bullicio de la ciudad. Desde 2010, Meritxell ha creado un espacio donde el bienestar es la prioridad, ofreciendo tratamientos personalizados que combinan experiencia, innovación y productos de alta calidad. Entra, desconecta y deja que el estrés quede fuera mientras te sumerges en una experiencia de relajación y belleza."  data-ca="totCOS no és només un centre d'estètica, és un refugi de pau en el bullici de la ciutat. Des de 2010, la Meritxell ha creat un espai on el benestar és la prioritat, oferint tractaments personalitzats que combinen experiència, innovació i productes d'alta qualitat. Entra, desconnecta i deixa que l'estrès quedi fora mentre et submergeixes en una experiència de relaxació i bellesa.">totCOS no es solo un centro de estética, es un refugio de paz en el bullicio de la ciudad. Desde 2010, Meritxell ha creado un espacio donde el bienestar es la prioridad, ofreciendo tratamientos personalizados que combinan experiencia, innovación y productos de alta calidad. Entra, desconecta y deja que el estrés quede fuera mientras te sumerges en una experiencia de relajación y belleza.</p>
-        </section>
-
-        <section id="contacto" class="contacto">
-            <h2 class="idioma" data-es="Contáctanos" data-ca="Contacta'ns">Contáctanos</h2>
-            <div class="info-contacto">
-                <p><i class="fas fa-map-marker-alt"></i> Passeig Maragall 265, Barcelona</p>
-                <p><i class="fas fa-phone"></i> 935 049 194</p>
-                <p><i class="fas fa-envelope"></i> totcoscentre@gmail.com</p>
-                <p><i class="fas fa-clock"></i><span class="idioma" data-es="Horario con cita previa" data-ca="Horari amb cita prèvia">Horario con cita previa</span></p>
-            </div>
-             <!-- Google Maps -->
-            <div class="mapa-google">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2992.759685345186!2d2.1781984764784966!3d41.39894969894825!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a4a327e45a1985%3A0x85329615b4984d58!2sPasseig%20de%20Maragall%2C%20265%2C%20Horta-Guinard%C3%B3%2C%2008032%20Barcelona!5e0!3m2!1ses!2ses!4v1718734293669!5m2!1ses!2ses" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
-        </section>
-    </div>
-
-    <footer>
-      <p>© 2025 totCOS - Todos los derechos reservados</p>
-      <p>Diseñado por Art Rutxe</p>
-    </footer>
-
-     <script>
-        function changeLanguage(lang) {
-            const elements = document.querySelectorAll('.idioma');
-            elements.forEach(el => {
-                const text = el.dataset[lang];
-                if (text) {
-                    el.textContent = text;
-                }
-            });
-            document.documentElement.lang = lang;
-        }
-        document.addEventListener('DOMContentLoaded', () => {
-           changeLanguage('es');
-        });
-
-        // Obtener la URL base y corregir el enlace del logo
-        const baseUrl = window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/')) + '/';
-        document.getElementById('logo-texto').href = baseUrl;
-
-        // --- Carrusel ---
-        let indiceImagen = 0;
-        const carrusel = document.querySelector('.carrusel');
-        const totalImagenes = document.querySelectorAll('.carrusel img').length; // Cuenta las imágenes
-
-        function mostrarImagen(indice) {
-          const desplazamiento = -indice * (100 / totalImagenes); //  Desplazamiento
-          carrusel.style.transform = `translateX(${desplazamiento}%)`;
+        if (fragmento.includes("puntos de daño físico")) {
+            const match = fragmento.match(/(\d+)\s+puntos/);
+            if (match) info.daño = parseInt(match[1]);
+            info.evento = "Impacto";
+        } else if (fragmento.includes("No da en el blanco")) {
+            info.evento = "Fallo";
+        } else if (fragmento.includes("El golpe es bloqueado")) {
+            info.evento = "Bloqueado";
         }
 
-        function siguienteImagen() {
-            indiceImagen = (indiceImagen + 1) % totalImagenes; // Usa el total de imágenes
-            mostrarImagen(indiceImagen);
+        if (info.evento !== "") {
+            dataProcesada.push(info);
+            golpeActual++;
         }
-        // Cambiar la imagen cada 5 segundos (5000 milisegundos)
-        setInterval(siguienteImagen, 5000);
-        // Mostrar la primera imagen al cargar la página
-        mostrarImagen(0);
+    }
 
-    </script>
+    // Calcular daño base promedio para detectar modificadores
+    const golpesConDaño = dataProcesada.filter(d => d.daño > 0);
+    const promedioDaño = golpesConDaño.reduce((a, b) => a + b.daño, 0) / golpesConDaño.length;
+
+    mostrarResultados(dataProcesada, promedioDaño);
+}
+
+function estimarZona(daño, promedio) {
+    if (daño === 0) return "---";
+    const ratio = daño / promedio;
+
+    if (ratio > 1.18) return "Hombro Derecho (+25% Daño)";
+    if (ratio > 1.05) return "Cabeza/Brazo D./Pierna D. (+10% Daño)";
+    if (ratio > 0.95) return "Hombro Izq / Pierna Izq (0%)";
+    if (ratio > 0.80) return "Brazo Izq / Centro (-10% Daño)";
+    return "Pecho (-25% Daño)";
+}
+
+function mostrarResultados(data, promedio) {
+    let html = `<h3>Promedio de daño detectado: ${Math.round(promedio)}</h3>`;
+    html += `<table><tr><th>Golpe</th><th>Acción Rival</th><th>Daño Físico</th><th>Zona Probable de Ataque</th><th>Posible Bloqueo (si tú atacaste)</th></tr>`;
+
+    // Agrupar por la posición 1-5
+    let resumenRondas = {1:[], 2:[], 3:[], 4:[], 5:[]};
+
+    data.forEach(item => {
+        const zona = estimarZona(item.daño, promedio);
+        resumenRondas[item.rondaPos].push(zona !== "---" ? zona : item.evento);
+
+        html += `<tr>
+            <td>${item.rondaPos}</td>
+            <td class="${item.evento === 'Bloqueado' ? 'block-event' : ''}">${item.evento}</td>
+            <td>${item.daño || '-'}</td>
+            <td class="highlight">${zona}</td>
+            <td>${item.evento === 'Bloqueado' ? 'Escudo Activo en Posición ' + item.rondaPos : '-'}</td>
+        </tr>`;
+    });
+
+    html += `</table>`;
+    document.getElementById('resultadoTabla').innerHTML = html;
+
+    // Resumen de deducción
+    let deduccion = "<h3>Deducción de Estrategia:</h3><ul>";
+    for(let i=1; i<=5; i++) {
+        const opciones = resumenRondas[i].filter(o => o !== "Fallo" && o !== "Bloqueado");
+        const masFrecuente = opciones.length > 0 ? opciones[0] : "Datos insuficientes (Fallo/Bloqueo)";
+        deduccion += `<li><b>Ronda ${i}:</b> El rival tiende a atacar a <span class='highlight'>${masFrecuente}</span></li>`;
+    }
+    deduccion += "</ul>";
+    document.getElementById('resumenBase').innerHTML = deduccion;
+}
+</script>
+
 </body>
 </html>
